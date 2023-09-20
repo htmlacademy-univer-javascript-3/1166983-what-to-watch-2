@@ -1,7 +1,7 @@
 import FilmCard from '../../components/FilmCard';
 import { FilmDetails } from '../../types/film.tsx';
 
-export default function MainPage({ title, genre, releaseYear }: FilmDetails) {
+export default function Main({ title, genre, releaseYear }: FilmDetails) {
   return (
     <>
       <section className="film-card">
