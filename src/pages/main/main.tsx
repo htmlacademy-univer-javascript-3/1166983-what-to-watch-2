@@ -1,5 +1,6 @@
-import FilmCard from '../../components/FilmCard';
+import FilmCard from '../../components/film-card';
 import { FilmDetails } from '../../types/film.tsx';
+import { FILM_DETAILS_MOCK } from '../../mock/film-details.ts';
 
 export default function Main({ title, genre, releaseYear }: FilmDetails) {
   return (
@@ -108,26 +109,9 @@ export default function Main({ title, genre, releaseYear }: FilmDetails) {
           </ul>
 
           <div className="catalog__films-list">
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
-            <FilmCard />
+            {FILM_DETAILS_MOCK.map(({ title: filmTitle, image }) => (
+              <FilmCard key={filmTitle} title={filmTitle} image={image} />
+            ))}
           </div>
 
           <div className="catalog__more">
