@@ -10,11 +10,15 @@ import NotFoundScreen from '../../pages/not-found-screen';
 import MyList from '../../pages/my-list';
 import PrivateRoute from '../private-route';
 
-export default function App(props: FilmDetails) {
+interface AppProps {
+  films: FilmDetails[];
+}
+
+export default function App({films}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoutes.Main} element={<Main {...props} />} />
+        <Route path={AppRoutes.Main} element={<Main films={films} selectedFilm={films[0]} />} />
         <Route path={AppRoutes.SignIn} element={<SignIn />} />
         <Route
           path={AppRoutes.MyList}

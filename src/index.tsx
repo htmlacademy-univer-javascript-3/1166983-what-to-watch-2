@@ -1,20 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app';
-import { FilmDetails } from './types/film.tsx';
+import { FILM_DETAILS_MOCK } from './mocks/films.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const mainPageProps: FilmDetails = {
-  title: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  releaseYear: 2014
-};
-
 root.render(
   <React.StrictMode>
-    <App {...mainPageProps}/>
+    <App films={FILM_DETAILS_MOCK}/>
   </React.StrictMode>
 );
