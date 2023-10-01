@@ -9,3 +9,9 @@ export interface FilmDetails extends FilmPreview {
   releaseYear: number;
   backgroundImage: string;
 }
+
+export enum FilmPageTabs {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
+}

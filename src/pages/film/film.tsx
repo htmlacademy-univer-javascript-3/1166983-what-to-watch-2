@@ -3,13 +3,17 @@ import Header from '../../components/header';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.tsx';
 import FilmList from '../../components/film-list';
-import { FilmDetails, FilmPreview } from '../../types/film.tsx';
+import { FilmDetails, FilmPageTabs, FilmPreview } from '../../types/film.tsx';
+import classNames from 'classnames';
+import { useState } from 'react';
 
 interface FilmProps extends FilmDetails {
   suggestions: FilmPreview [];
 }
 
-export default function Film({id, suggestions}: FilmProps) {
+export default function Film({ id, suggestions }: FilmProps) {
+  const [selectedTab, setSelectedTab] = useState<FilmPageTabs>(FilmPageTabs.Overview);
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -61,21 +65,26 @@ export default function Film({id, suggestions}: FilmProps) {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img
+                src="img/the-grand-budapest-hotel-poster.jpg"
+                alt="The Grand Budapest Hotel poster"
+                width="218"
+                height="327"
+              />
             </div>
 
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="#" className="film-nav__link">Reviews</a>
-                  </li>
+                  {Object.values(FilmPageTabs).map((tab) => (
+                    <li
+                      key={tab}
+                      className={classNames('film-nav__item', tab === selectedTab && 'film-nav__item--active')}
+                      onClick={() => setSelectedTab(tab)}
+                    >
+                      <span className="film-nav__link">{tab}</span>
+                    </li>
+                  ))}
                 </ul>
               </nav>
 
@@ -88,13 +97,23 @@ export default function Film({id, suggestions}: FilmProps) {
               </div>
 
               <div className="film-card__text">
-                <p>In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.</p>
+                <p>
+                  In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge
+                  Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&apos;s friend and protege.
+                </p>
 
-                <p>Gustave prides himself on providing first-className service to the hotel&apos;s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.</p>
+                <p>
+                  Gustave prides himself on providing first-className service to the hotel&apos;s guests, including
+                  satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&apos;s
+                  lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief
+                  suspect in her murder.
+                </p>
 
                 <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
 
-                <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
+                <p className="film-card__starring">
+                  <strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong>
+                </p>
               </div>
             </div>
           </div>
