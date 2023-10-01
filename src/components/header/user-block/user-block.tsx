@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../../types/routes.tsx';
+
 export default function UserBlock() {
   return (
     <ul className="user-block">
@@ -7,7 +10,7 @@ export default function UserBlock() {
         </div>
       </li>
       <li className="user-block__item">
-        <a className="user-block__link">Sign out</a>
+        <Link to={AppRoutes.Main} className="user-block__link">Sign out</Link>
       </li>
     </ul>
   );

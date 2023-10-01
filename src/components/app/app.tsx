@@ -24,11 +24,11 @@ export default function App({films}: AppProps) {
           path={AppRoutes.MyList}
           element={
             <PrivateRoute>
-              <MyList />
+              <MyList films={films} />
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Film} element={<Film />} />
+        <Route path={AppRoutes.Film} element={<Film {...films[0]} suggestions={films} />} />
         <Route path={AppRoutes.AddReview} element={<AddReview />} />
         <Route path={AppRoutes.Player} element={<Player />} />
         <Route path={AppRoutes.NotFoundScreen} element={<NotFoundScreen />} />
