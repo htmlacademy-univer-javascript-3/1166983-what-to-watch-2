@@ -7,7 +7,7 @@ interface FilmListProps {
 }
 
 export default function FilmList({ data }: FilmListProps) {
-  const [, setActiveFilmCard] = useState<number>(0);
+  const [, setActiveFilmCard] = useState<string>('');
 
   return (
     <div className="catalog__films-list">

@@ -1,13 +1,13 @@
 export interface PlayerProps {
-  videoSrc: string;
-  poster: string;
-  title: string;
+  videoLink: string;
+  posterImage: string;
+  name: string;
 }
 
-export default function Player({title, videoSrc, poster}: PlayerProps) {
+export default function Player({name, videoLink, posterImage}: PlayerProps) {
   return (
     <div className="player">
-      <video src={videoSrc} className="player__video" poster={poster}></video>
+      <video src={videoLink} className="player__video" poster={posterImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -27,7 +27,7 @@ export default function Player({title, videoSrc, poster}: PlayerProps) {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">{title}</div>
+          <div className="player__name">{name}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">

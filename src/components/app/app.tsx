@@ -1,5 +1,5 @@
 import Main from '../../pages/main';
-import { FilmDetails } from '../../types/film.tsx';
+import { FilmDetails, FilmPreview } from '../../types/film.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.tsx';
 import Film from '../../pages/film';
@@ -12,7 +12,7 @@ import PrivateRoute from '../private-route';
 import { PlayerProps } from '../../pages/player/player.tsx';
 
 interface AppProps {
-  films: FilmDetails[];
+  films: (FilmDetails & FilmPreview)[];
   playerData: PlayerProps;
 }
 
