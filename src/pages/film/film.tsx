@@ -1,11 +1,12 @@
 import Footer from '../../components/footer';
 import Header from '../../components/header';
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../types/routes.tsx';
+import { AppRoutes } from '../../types/routes.ts';
 import FilmList from '../../components/film-list';
-import { FilmDetails, FilmPageTabs, FilmPreview } from '../../types/film.tsx';
+import { FilmDetails, FilmPageTabs, FilmPreview } from '../../types/film.ts';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { getRatingDescription } from '../../utils/film.ts';
 
 interface FilmProps extends FilmDetails {
   suggestions: FilmPreview [];
@@ -26,6 +27,8 @@ export default function Film({
   suggestions
 }: FilmProps) {
   const [selectedTab, setSelectedTab] = useState<FilmPageTabs>(FilmPageTabs.Overview);
+
+  const ratingDescription = useMemo(() => getRatingDescription(rating), [rating]);
 
   return (
     <>
@@ -104,7 +107,7 @@ export default function Film({
               <div className="film-rating">
                 <div className="film-rating__score">{rating}</div>
                 <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
+                  <span className="film-rating__level">{ratingDescription}</span>
                   <span className="film-rating__count">{scoresCount} ratings</span>
                 </p>
               </div>
@@ -116,7 +119,7 @@ export default function Film({
                 <p className="film-card__director"><strong>Director: {director}</strong></p>
 
                 <p className="film-card__starring">
-                  <strong>Starring: {starring?.join(', ')} and other</strong>
+                  <strong>Starring: {starring?.join(', ')}</strong>
                 </p>
               </div>
             </div>

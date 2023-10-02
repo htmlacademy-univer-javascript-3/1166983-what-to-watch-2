@@ -1,4 +1,4 @@
-import type { FilmDetails, FilmPreview } from '../../types/film.tsx';
+import type { FilmDetails, FilmPreview } from '../../types/film.ts';
 import Footer from '../../components/footer';
 import FilmList from '../../components/film-list';
 import Header from '../../components/header';

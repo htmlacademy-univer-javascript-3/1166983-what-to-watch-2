@@ -1,6 +1,6 @@
-import type { FilmPreview } from '../../types/film.tsx';
+import type { FilmPreview } from '../../types/film.ts';
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../types/routes.tsx';
+import { AppRoutes } from '../../types/routes.ts';
 
 interface FilmCardProps extends FilmPreview {
   onHover: (id: string) => void;

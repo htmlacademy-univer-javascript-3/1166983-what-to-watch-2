@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../types/routes.tsx';
+import { AppRoutes } from '../../types/routes.ts';
 
 export default function NotFoundScreen() {
   return (

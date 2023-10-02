@@ -1,4 +1,4 @@
-import { FilmDetails, FilmPreview } from '../types/film.tsx';
+import { FilmDetails, FilmPreview } from '../types/film.ts';
 
 export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
   {
@@ -12,6 +12,14 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     name: 'The Grand Budapest Hotel',
     genre: 'Drama',
     released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
   {
     id: '2',
@@ -23,7 +31,15 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     previewVideoLink: 'https://url-to-video/video.mp4',
     name: 'Bohemian Rhapsody',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
   {
     id: '3',
@@ -35,7 +51,15 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     previewVideoLink: 'https://url-to-video/video.mp4',
     name: 'Macbeth',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
   {
     id: '4',
@@ -47,7 +71,15 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     previewVideoLink: 'https://url-to-video/video.mp4',
     name: 'Aviator',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
   {
     id: '5',
@@ -59,7 +91,15 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     previewVideoLink: 'https://url-to-video/video.mp4',
     name: 'We need to talk about Kevin',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
   {
     id: '6',
@@ -71,7 +111,15 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     previewVideoLink: 'https://url-to-video/video.mp4',
     name: 'What We Do in the Shadows',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
   {
     id: '7',
@@ -83,7 +131,15 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     previewVideoLink: 'https://url-to-video/video.mp4',
     name: 'Revenant',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
   {
     id: '8',
@@ -95,6 +151,14 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     previewVideoLink: 'https://url-to-video/video.mp4',
     name: 'Johnny English',
     genre: 'Drama',
-    released: 2014
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
   },
 ];

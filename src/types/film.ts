@@ -11,12 +11,12 @@ export interface FilmDetails extends Omit<FilmPreview, 'previewImage' | 'preview
   backgroundImage: string;
   backgroundColor?: string;
   videoLink: string;
-  description?: string;
-  rating?: number;
-  scoresCount?: number;
-  director?: string;
-  starring?: string[];
-  runTime?: number;
+  description: string;
+  rating: number;
+  scoresCount: number;
+  director: string;
+  starring: string[];
+  runTime: number;
   released: number;
   isFavorite: boolean;
 }
@@ -25,4 +25,12 @@ export enum FilmPageTabs {
   Overview = 'Overview',
   Details = 'Details',
   Reviews = 'Reviews',
+}
+
+export enum RatingDescription {
+  Bad = 'Bad',
+  Normal = 'Normal',
+  Good = 'Good',
+  VeryGood = 'Very good',
+  Awesome = 'Awesome',
 }

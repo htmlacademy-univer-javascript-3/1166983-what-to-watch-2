@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import FilmCard from '../film-card';
-import type { FilmPreview } from '../../types/film.tsx';
+import type { FilmPreview } from '../../types/film.ts';
 
 interface FilmListProps {
   data: FilmPreview[];

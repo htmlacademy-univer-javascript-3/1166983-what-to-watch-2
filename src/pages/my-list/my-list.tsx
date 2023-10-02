@@ -1,7 +1,7 @@
 import Footer from '../../components/footer';
 import Header from '../../components/header';
 import FilmList from '../../components/film-list';
-import { FilmPreview } from '../../types/film.tsx';
+import { FilmPreview } from '../../types/film.ts';
 
 interface FilmListProps {
   films: FilmPreview [];

@@ -1,4 +1,4 @@
-import { AppRoutes } from '../../types/routes.tsx';
+import { AppRoutes } from '../../types/routes.ts';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {

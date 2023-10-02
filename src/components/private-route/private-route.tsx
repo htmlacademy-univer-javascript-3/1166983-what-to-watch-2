@@ -1,6 +1,6 @@
 import {Navigate} from 'react-router-dom';
 import { ReactElement } from 'react';
-import { AppRoutes } from '../../types/routes.tsx';
+import { AppRoutes } from '../../types/routes.ts';
 
 interface PrivateRouteProps {
   isAuthorized?: boolean;

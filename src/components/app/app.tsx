@@ -1,7 +1,7 @@
 import Main from '../../pages/main';
-import { FilmDetails, FilmPreview } from '../../types/film.tsx';
+import { FilmDetails, FilmPreview } from '../../types/film.ts';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoutes } from '../../types/routes.tsx';
+import { AppRoutes } from '../../types/routes.ts';
 import Film from '../../pages/film';
 import AddReview from '../../pages/add-review';
 import SignIn from '../../pages/sign-in';

@@ -1,6 +1,6 @@
 import Header from '../../components/header';
 import AddReviewForm from './add-review-form';
-import { FilmDetails } from '../../types/film.tsx';
+import { FilmDetails } from '../../types/film.ts';
 
 export default function AddReview({id, backgroundImage, name, posterImage}: FilmDetails) {
   return (
