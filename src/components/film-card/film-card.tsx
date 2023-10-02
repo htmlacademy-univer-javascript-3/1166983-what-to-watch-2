@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.tsx';
 
 interface FilmCardProps extends FilmPreview {
-  onHover: (id: number) => void;
+  onHover: (id: string) => void;
 }
 
 export default function FilmCard({ id, name, previewImage, onHover }: FilmCardProps) {
@@ -13,7 +13,7 @@ export default function FilmCard({ id, name, previewImage, onHover }: FilmCardPr
         <img src={previewImage} alt={name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={AppRoutes.Film.replace(':id', id.toString())}>
+        <Link className="small-film-card__link" to={AppRoutes.Film.replace(':id', id)}>
           {name}
         </Link>
       </h3>

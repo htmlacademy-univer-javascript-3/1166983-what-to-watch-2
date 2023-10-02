@@ -52,7 +52,7 @@ export default function Film({ id, name, genre, released, suggestions }: FilmPro
                   <span className="film-card__count">9</span>
                 </button>
                 <Link
-                  to={AppRoutes.AddReview.replace(':id', id.toString())}
+                  to={AppRoutes.AddReview.replace(':id', id)}
                   className="btn film-card__button"
                 >
                   Add review

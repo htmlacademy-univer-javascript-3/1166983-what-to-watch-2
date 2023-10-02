@@ -2,7 +2,7 @@ import Header from '../../components/header';
 import AddReviewForm from './add-review-form';
 import { FilmDetails } from '../../types/film.tsx';
 
-export default function AddReview({id, backgroundImage, name, previewImage}: FilmDetails) {
+export default function AddReview({id, backgroundImage, name, posterImage}: FilmDetails) {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -14,12 +14,12 @@ export default function AddReview({id, backgroundImage, name, previewImage}: Fil
 
         <Header>
           <Header.Logo />
-          <Header.Breadcrumbs title={name} id={id} />
+          <Header.Breadcrumbs name={name} id={id} />
           <Header.UserBlock />
         </Header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={previewImage} alt={`${name} poster`} width="218" height="327" />
+          <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
         </div>
       </div>
 

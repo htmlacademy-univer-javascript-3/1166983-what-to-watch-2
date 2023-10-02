@@ -2,21 +2,21 @@ import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../../types/routes.tsx';
 
 interface BreadcrumbsProps {
-  id: number;
-  title: string;
+  id: string;
+  name: string;
 }
 
-export default function Breadcrumbs({id, title}: BreadcrumbsProps) {
+export default function Breadcrumbs({id, name}: BreadcrumbsProps) {
   return (
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
         <li className="breadcrumbs__item">
-          <Link to={AppRoutes.Film.replace(':id', id.toString())} className="breadcrumbs__link">
-            {title}
+          <Link to={AppRoutes.Film.replace(':id', id)} className="breadcrumbs__link">
+            {name}
           </Link>
         </li>
         <li className="breadcrumbs__item">
-          <Link className="breadcrumbs__link" to={AppRoutes.AddReview.replace(':id', id.toString())}>
+          <Link className="breadcrumbs__link" to={AppRoutes.AddReview.replace(':id', id)}>
             Add review
           </Link>
         </li>
