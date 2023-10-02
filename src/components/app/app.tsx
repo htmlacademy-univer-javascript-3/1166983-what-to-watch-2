@@ -16,7 +16,7 @@ interface AppProps {
   playerData: PlayerProps;
 }
 
-export default function App({films, playerData}: AppProps) {
+export default function App({ films, playerData }: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -31,7 +31,14 @@ export default function App({films, playerData}: AppProps) {
           }
         />
         <Route path={AppRoutes.Film} element={<Film {...films[0]} suggestions={films} />} />
-        <Route path={AppRoutes.AddReview} element={<AddReview {...films[0]} />} />
+        <Route
+          path={AppRoutes.AddReview}
+          element={
+            <PrivateRoute>
+              <AddReview {...films[0]} />
+            </PrivateRoute>
+          }
+        />
         <Route path={AppRoutes.Player} element={<Player {...playerData} />} />
         <Route path={AppRoutes.NotFoundScreen} element={<NotFoundScreen />} />
       </Routes>

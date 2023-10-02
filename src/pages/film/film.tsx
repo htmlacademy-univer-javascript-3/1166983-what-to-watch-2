@@ -11,7 +11,7 @@ interface FilmProps extends FilmDetails {
   suggestions: FilmPreview [];
 }
 
-export default function Film({ id, title, genre, releaseYear, suggestions }: FilmProps) {
+export default function Film({ id, name, genre, released, suggestions }: FilmProps) {
   const [selectedTab, setSelectedTab] = useState<FilmPageTabs>(FilmPageTabs.Overview);
 
   return (
@@ -31,10 +31,10 @@ export default function Film({ id, title, genre, releaseYear, suggestions }: Fil
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseYear}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">

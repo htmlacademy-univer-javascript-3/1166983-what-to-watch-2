@@ -13,7 +13,7 @@ export default function Main({ selectedFilm, films }: MainProps) {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={selectedFilm.backgroundImage} alt={selectedFilm.title} />
+          <img src={selectedFilm.backgroundImage} alt={selectedFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -35,10 +35,10 @@ export default function Main({ selectedFilm, films }: MainProps) {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{selectedFilm.title}</h2>
+              <h2 className="film-card__title">{selectedFilm.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{selectedFilm.genre}</span>
-                <span className="film-card__year">{selectedFilm.releaseYear}</span>
+                <span className="film-card__year">{selectedFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">

@@ -11,8 +11,8 @@ export default function FilmList({ data }: FilmListProps) {
 
   return (
     <div className="catalog__films-list">
-      {data.map(({ id, title, image }) => (
-        <FilmCard key={id} id={id} title={title} image={image} onHover={setActiveFilmCard} />
+      {data.map((value) => (
+        <FilmCard key={value.id} {...value} onHover={setActiveFilmCard} />
       ))}
     </div>
   );

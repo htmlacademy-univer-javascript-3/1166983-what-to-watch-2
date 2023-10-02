@@ -1,12 +1,12 @@
 export interface FilmPreview {
   id: number;
-  title: string;
-  image: string;
+  name: string;
+  previewImage: string;
+  genre: string;
 }
 
 export interface FilmDetails extends FilmPreview {
-  genre: string;
-  releaseYear: number;
+  released: number;
   backgroundImage: string;
 }
 
