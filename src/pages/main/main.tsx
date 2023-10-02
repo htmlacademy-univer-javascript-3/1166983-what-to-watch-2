@@ -27,8 +27,8 @@ export default function Main({ selectedFilm, films }: MainProps) {
           <div className="film-card__info">
             <div className="film-card__poster">
               <img
-                src="img/the-grand-budapest-hotel-poster.jpg"
-                alt="The Grand Budapest Hotel poster"
+                src={selectedFilm.posterImage}
+                alt={`${selectedFilm.name} poster`}
                 width="218"
                 height="327"
               />
