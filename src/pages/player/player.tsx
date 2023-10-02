@@ -1,7 +1,13 @@
-export default function Player() {
+export interface PlayerProps {
+  videoSrc: string;
+  poster: string;
+  title: string;
+}
+
+export default function Player({title, videoSrc, poster}: PlayerProps) {
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={videoSrc} className="player__video" poster={poster}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
@@ -21,7 +27,7 @@ export default function Player() {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{title}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">

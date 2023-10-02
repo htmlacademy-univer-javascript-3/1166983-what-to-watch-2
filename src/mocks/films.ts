@@ -1,9 +1,9 @@
 export const FILM_DETAILS_MOCK = [
   {
     id: 1,
-    image: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',
+    image: 'img/the-grand-budapest-hotel-poster.jpg',
     backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
-    title: 'Fantastic Beasts: The Crimes of Grindelwald',
+    title: 'The Grand Budapest Hotel',
     genre: 'Drama',
     releaseYear: 2014
   },

@@ -9,12 +9,14 @@ import Player from '../../pages/player';
 import NotFoundScreen from '../../pages/not-found-screen';
 import MyList from '../../pages/my-list';
 import PrivateRoute from '../private-route';
+import { PlayerProps } from '../../pages/player/player.tsx';
 
 interface AppProps {
   films: FilmDetails[];
+  playerData: PlayerProps;
 }
 
-export default function App({films}: AppProps) {
+export default function App({films, playerData}: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -29,8 +31,8 @@ export default function App({films}: AppProps) {
           }
         />
         <Route path={AppRoutes.Film} element={<Film {...films[0]} suggestions={films} />} />
-        <Route path={AppRoutes.AddReview} element={<AddReview />} />
-        <Route path={AppRoutes.Player} element={<Player />} />
+        <Route path={AppRoutes.AddReview} element={<AddReview {...films[0]} />} />
+        <Route path={AppRoutes.Player} element={<Player {...playerData} />} />
         <Route path={AppRoutes.NotFoundScreen} element={<NotFoundScreen />} />
       </Routes>
     </BrowserRouter>
