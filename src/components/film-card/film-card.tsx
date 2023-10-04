@@ -1,16 +1,21 @@
-interface FilmCardProps {
-  title: string;
-  image: string;
+import type { FilmPreview } from '../../types/film.ts';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../types/routes.ts';
+
+interface FilmCardProps extends FilmPreview {
+  onHover: (id: string) => void;
 }
 
-export default function FilmCard({title, image}: FilmCardProps) {
+export default function FilmCard({ id, name, previewImage, onHover }: FilmCardProps) {
   return (
-    <article className="small-film-card catalog__films-card">
+    <article className="small-film-card catalog__films-card" onMouseOver={() => onHover(id)}>
       <div className="small-film-card__image">
-        <img src={image} alt={image} width="280" height="175" />
+        <img src={previewImage} alt={name} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">{title}</a>
+        <Link className="small-film-card__link" to={AppRoutes.Film.replace(':id', id)}>
+          {name}
+        </Link>
       </h3>
     </article>
   );
