@@ -2,6 +2,7 @@ import VideoPlayer from '../../components/video-player';
 import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.ts';
+import TimeControls from './time-controls';
 
 export interface PlayerProps {
   videoLink: string;
@@ -10,24 +11,38 @@ export interface PlayerProps {
 }
 
 export default function Player({ name, videoLink, posterImage }: PlayerProps) {
-  const ref = useRef<HTMLVideoElement>(null);
+  const playerRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [time, setTime] = useState<number>(0);
   const navigate = useNavigate();
   const id = Number(useParams().id);
 
   function handlePlay() {
-    ref.current?.play();
+    playerRef.current?.play();
     setIsPlaying(true);
   }
 
   function handlePause() {
-    ref.current?.pause();
+    playerRef.current?.pause();
     setIsPlaying(false);
   }
 
+  function handleTimeUpdate() {
+    setTime(Number(playerRef.current?.currentTime));
+  }
+
+  function HandleFullScreenToggle() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      containerRef.current?.requestFullscreen();
+    }
+  }
+
   return (
-    <div className="player">
-      <VideoPlayer videoLink={videoLink} posterImage={posterImage} ref={ref} />
+    <div className="player" ref={containerRef}>
+      <VideoPlayer videoLink={videoLink} posterImage={posterImage} ref={playerRef} onTimeUpdate={handleTimeUpdate} />
       <button
         type="button"
         className="player__exit"
@@ -36,13 +51,7 @@ export default function Player({ name, videoLink, posterImage }: PlayerProps) {
         Exit
       </button>
       <div className="player__controls">
-        <div className="player__controls-row">
-          <div className="player__time">
-            <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
-          </div>
-          <div className="player__time-value">1:30:29</div>
-        </div>
+        <TimeControls time={time} duration={Number(playerRef.current?.duration)} />
         <div className="player__controls-row">
           {isPlaying ? (
             <button type="button" className="player__play" onClick={handlePause}>
@@ -60,7 +69,7 @@ export default function Player({ name, videoLink, posterImage }: PlayerProps) {
             </button>
           )}
           <div className="player__name">{name}</div>
-          <button type="button" className="player__full-screen">
+          <button type="button" className="player__full-screen" onClick={HandleFullScreenToggle}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>

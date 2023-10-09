@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 export interface VideoPlayerProps {
   videoLink: string;
   posterImage: string;
+  onTimeUpdate?: () => void;
   muted?: boolean;
 }
 
@@ -10,6 +11,7 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>((
   {
     videoLink,
     posterImage,
+    onTimeUpdate,
     muted = false
   },
   ref
@@ -18,9 +20,10 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>((
     ref={ref}
     className="player__video"
     poster={posterImage}
+    onTimeUpdate={onTimeUpdate}
     muted={muted}
   >
-    <source src={videoLink} type="video/mp4" />
+    <source src={videoLink} />
   </video>
 ));
 
