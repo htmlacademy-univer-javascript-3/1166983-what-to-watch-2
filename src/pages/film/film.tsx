@@ -1,6 +1,6 @@
 import Footer from '../../components/footer';
 import Header from '../../components/header';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.ts';
 import FilmList from '../../components/film-list';
 import { FilmDetails, FilmPageTabs, FilmPreview } from '../../types/film.ts';
@@ -27,7 +27,7 @@ export default function Film({
   suggestions
 }: FilmProps) {
   const [selectedTab, setSelectedTab] = useState<FilmPageTabs>(FilmPageTabs.Overview);
-
+  const navigate = useNavigate();
   const ratingDescription = useMemo(() => getRatingDescription(rating), [rating]);
 
   return (
@@ -54,7 +54,10 @@ export default function Film({
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button
+                  className="btn btn--play film-card__button" type="button"
+                  onClick={() => navigate(AppRoutes.Player.replace(':id', id))}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
