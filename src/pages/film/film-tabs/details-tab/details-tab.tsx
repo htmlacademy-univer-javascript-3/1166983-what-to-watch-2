@@ -1,5 +1,6 @@
 import { FilmDetails } from '../../../../types/film.ts';
 import './details-tab.css';
+import { formatRunTime } from '../../../../utils/format.ts';
 
 export default function DetailsTab({
   genre,
@@ -30,7 +31,7 @@ export default function DetailsTab({
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">1h 39m {runTime}</span>
+          <span className="film-card__details-value">{formatRunTime(runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
