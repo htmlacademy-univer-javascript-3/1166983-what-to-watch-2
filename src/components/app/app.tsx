@@ -10,13 +10,15 @@ import NotFoundScreen from '../../pages/not-found-screen';
 import MyList from '../../pages/my-list';
 import PrivateRoute from '../private-route';
 import { PlayerProps } from '../../pages/player/player.tsx';
+import { Review } from '../../types/review.ts';
 
 interface AppProps {
   films: (FilmDetails & FilmPreview)[];
   playerData: PlayerProps;
+  reviews: Review[];
 }
 
-export default function App({ films, playerData }: AppProps) {
+export default function App({ films, playerData, reviews }: AppProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -30,7 +32,7 @@ export default function App({ films, playerData }: AppProps) {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Film} element={<Film {...films[0]} suggestions={films} />} />
+        <Route path={AppRoutes.Film} element={<Film {...films[0]} suggestions={films} reviews={reviews} />} />
         <Route
           path={AppRoutes.AddReview}
           element={
