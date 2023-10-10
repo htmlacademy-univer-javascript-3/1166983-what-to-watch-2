@@ -32,7 +32,7 @@ export default function Player({ name, videoLink, posterImage }: PlayerProps) {
     setTime(Number(playerRef.current?.currentTime));
   }
 
-  function HandleFullScreenToggle() {
+  function handleFullScreenToggle() {
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
@@ -69,7 +69,7 @@ export default function Player({ name, videoLink, posterImage }: PlayerProps) {
             </button>
           )}
           <div className="player__name">{name}</div>
-          <button type="button" className="player__full-screen" onClick={HandleFullScreenToggle}>
+          <button type="button" className="player__full-screen" onClick={handleFullScreenToggle}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>

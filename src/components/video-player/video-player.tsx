@@ -5,6 +5,7 @@ export interface VideoPlayerProps {
   posterImage: string;
   onTimeUpdate?: () => void;
   muted?: boolean;
+  autoPlay?: boolean;
 }
 
 const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>((
@@ -12,7 +13,8 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>((
     videoLink,
     posterImage,
     onTimeUpdate,
-    muted = false
+    muted = false,
+    autoPlay = false,
   },
   ref
 ) => (
@@ -22,6 +24,7 @@ const VideoPlayer = forwardRef<HTMLVideoElement, VideoPlayerProps>((
     poster={posterImage}
     onTimeUpdate={onTimeUpdate}
     muted={muted}
+    autoPlay={autoPlay}
   >
     <source src={videoLink} />
   </video>
