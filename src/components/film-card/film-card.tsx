@@ -2,20 +2,37 @@ import type { FilmPreview } from '../../types/film.ts';
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.ts';
 import VideoPlayer from '../video-player';
+import { useEffect, useRef, useState } from 'react';
 
-interface FilmCardProps extends FilmPreview {
-  onHover: (id: string) => void;
-  isActive?: boolean;
-}
+export default function FilmCard({ id, name, previewImage, previewVideoLink }: FilmPreview) {
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-export default function FilmCard({ id, name, previewImage, onHover, isActive, previewVideoLink }: FilmCardProps) {
+  function handleMouseOver() {
+    timeoutRef.current = setTimeout(() => setIsHovering(true), 1000);
+  }
+
+  function handleMouseLeave() {
+    if (timeoutRef.current) {
+      setIsHovering(false);
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
+  useEffect(() => () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }, []);
+
+
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseOver={() => onHover(id)}
-      onMouseLeave={() => onHover('')}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
-      {isActive ? (
+      {isHovering ? (
         <VideoPlayer videoLink={previewVideoLink} posterImage={previewImage} muted autoPlay />
       ) : (
         <>
