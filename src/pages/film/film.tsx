@@ -12,6 +12,7 @@ interface FilmProps extends FilmDetails {
 }
 
 export default function Film({
+  id,
   name,
   genre,
   backgroundImage,
@@ -50,10 +51,10 @@ export default function Film({
                 <span className="film-card__year">{released}</span>
               </p>
 
-              <FilmControls>
-                <FilmControls.PlayLink />
+              <FilmControls >
+                <FilmControls.PlayLink id={id} />
                 <FilmControls.MyListButton />
-                <FilmControls.AddReviewLink />
+                <FilmControls.AddReviewLink id={id} />
               </FilmControls>
             </div>
           </div>

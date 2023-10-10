@@ -1,12 +1,14 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../../types/routes.ts';
 
-export default function AddReviewLink() {
-  const id = Number(useParams().id);
+interface AddReviewLinkProps {
+  id: string;
+}
 
+export default function AddReviewLink({id}: AddReviewLinkProps) {
   return (
     <Link
-      to={AppRoutes.AddReview.replace(':id', id.toString())}
+      to={AppRoutes.AddReview.replace(':id', id)}
       className="btn film-card__button"
     >
       Add review

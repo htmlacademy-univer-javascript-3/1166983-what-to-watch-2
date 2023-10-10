@@ -43,7 +43,7 @@ export default function Main({ selectedFilm, films }: MainProps) {
               </p>
 
               <FilmControls>
-                <FilmControls.PlayLink />
+                <FilmControls.PlayLink id={selectedFilm.id} />
                 <FilmControls.MyListButton />
               </FilmControls>
             </div>
