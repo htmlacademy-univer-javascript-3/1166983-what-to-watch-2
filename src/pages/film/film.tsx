@@ -1,19 +1,17 @@
 import Footer from '../../components/footer';
 import Header from '../../components/header';
-import { Link, useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../types/routes.ts';
 import FilmList from '../../components/film-list';
 import { FilmDetails, FilmPageTabs, FilmPreview } from '../../types/film.ts';
 import classNames from 'classnames';
 import { useMemo, useState } from 'react';
 import { getRatingDescription } from '../../utils/film.ts';
+import FilmControls from '../../components/film-controls';
 
 interface FilmProps extends FilmDetails {
   suggestions: FilmPreview [];
 }
 
 export default function Film({
-  id,
   name,
   genre,
   backgroundImage,
@@ -27,7 +25,6 @@ export default function Film({
   suggestions
 }: FilmProps) {
   const [selectedTab, setSelectedTab] = useState<FilmPageTabs>(FilmPageTabs.Overview);
-  const navigate = useNavigate();
   const ratingDescription = useMemo(() => getRatingDescription(rating), [rating]);
 
   return (
@@ -53,30 +50,11 @@ export default function Film({
                 <span className="film-card__year">{released}</span>
               </p>
 
-              <div className="film-card__buttons">
-                <button
-                  className="btn btn--play film-card__button" type="button"
-                  onClick={() => navigate(AppRoutes.Player.replace(':id', id))}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
-                <Link
-                  to={AppRoutes.AddReview.replace(':id', id)}
-                  className="btn film-card__button"
-                >
-                  Add review
-                </Link>
-              </div>
+              <FilmControls>
+                <FilmControls.PlayLink />
+                <FilmControls.MyListButton />
+                <FilmControls.AddReviewLink />
+              </FilmControls>
             </div>
           </div>
         </div>
