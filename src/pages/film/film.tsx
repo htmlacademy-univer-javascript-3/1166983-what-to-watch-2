@@ -1,39 +1,23 @@
 import Footer from '../../components/footer';
 import Header from '../../components/header';
 import FilmList from '../../components/film-list';
-import { FilmDetails, FilmPageTabs, FilmPreview } from '../../types/film.ts';
-import classNames from 'classnames';
-import { useMemo, useState } from 'react';
-import { getRatingDescription } from '../../utils/film.ts';
+import { FilmDetails, FilmPreview } from '../../types/film.ts';
 import FilmControls from '../../components/film-controls';
+import FilmTabs from './film-tabs';
+import { Review } from '../../types/review.ts';
 
 interface FilmProps extends FilmDetails {
   suggestions: FilmPreview [];
+  reviews: Review[];
 }
 
-export default function Film({
-  id,
-  name,
-  genre,
-  backgroundImage,
-  posterImage,
-  rating,
-  description,
-  director,
-  starring,
-  scoresCount,
-  released,
-  suggestions
-}: FilmProps) {
-  const [selectedTab, setSelectedTab] = useState<FilmPageTabs>(FilmPageTabs.Overview);
-  const ratingDescription = useMemo(() => getRatingDescription(rating), [rating]);
-
+export default function Film({ reviews, suggestions, ...filmData }: FilmProps) {
   return (
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={backgroundImage} alt={name} />
+            <img src={filmData.backgroundImage} alt={filmData.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -45,16 +29,16 @@ export default function Film({
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{name}</h2>
+              <h2 className="film-card__title">{filmData.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{released}</span>
+                <span className="film-card__genre">{filmData.genre}</span>
+                <span className="film-card__year">{filmData.released}</span>
               </p>
 
-              <FilmControls >
-                <FilmControls.PlayLink id={id} />
+              <FilmControls>
+                <FilmControls.PlayLink id={filmData.id} />
                 <FilmControls.MyListButton />
-                <FilmControls.AddReviewLink id={id} />
+                <FilmControls.AddReviewLink id={filmData.id} />
               </FilmControls>
             </div>
           </div>
@@ -64,47 +48,13 @@ export default function Film({
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src={posterImage}
-                alt={`${name} poster`}
+                src={filmData.posterImage}
+                alt={`${filmData.name} poster`}
                 width="218"
                 height="327"
               />
             </div>
-
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  {Object.values(FilmPageTabs).map((tab) => (
-                    <li
-                      key={tab}
-                      className={classNames('film-nav__item', tab === selectedTab && 'film-nav__item--active')}
-                      onClick={() => setSelectedTab(tab)}
-                    >
-                      <span className="film-nav__link">{tab}</span>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">{ratingDescription}</span>
-                  <span className="film-rating__count">{scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>
-                  {description}
-                </p>
-                <p className="film-card__director"><strong>Director: {director}</strong></p>
-
-                <p className="film-card__starring">
-                  <strong>Starring: {starring?.join(', ')}</strong>
-                </p>
-              </div>
-            </div>
+            <FilmTabs reviews={reviews} {...filmData} />
           </div>
         </div>
       </section>

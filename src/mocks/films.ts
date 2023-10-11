@@ -17,7 +17,8 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     scoresCount: 240,
     director: 'Wes Anderson',
     starring: [
-      'Bill Murray'
+      'Bill Murray',
+      'Random Guy'
     ],
     runTime: 99,
   },
