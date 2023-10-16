@@ -2,10 +2,16 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../../hooks';
 import classNames from 'classnames';
 import { setSelectedGenre } from '../../../store/action.ts';
+import { useEffect } from 'react';
+import { ALL_GENRES } from '../../../constants/film.ts';
 
 export default function GenreList() {
   const { genres, selectedGenre } = useAppSelector((state) => state.film);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSelectedGenre(ALL_GENRES));
+  }, [dispatch]);
 
   return (
     <ul className="catalog__genres-list">
