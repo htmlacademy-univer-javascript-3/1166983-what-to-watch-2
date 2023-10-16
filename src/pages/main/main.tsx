@@ -3,10 +3,9 @@ import Footer from '../../components/footer';
 import FilmList from '../../components/film-list';
 import Header from '../../components/header';
 import FilmControls from '../../components/film-controls';
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { setFilms } from '../../store/action.ts';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreList from './genre-list';
 
 interface MainProps {
@@ -16,7 +15,7 @@ interface MainProps {
 
 export default function Main({ selectedFilm, films }: MainProps) {
   const filteredFilms: FilmPreview[] = useAppSelector((state) => state.film.filteredFilms);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(setFilms(films));
