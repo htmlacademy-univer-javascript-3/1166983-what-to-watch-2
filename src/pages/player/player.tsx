@@ -51,7 +51,7 @@ export default function Player({ name, videoLink, posterImage }: PlayerProps) {
         Exit
       </button>
       <div className="player__controls">
-        <TimeControls time={time} duration={Number(playerRef.current?.duration)} />
+        {playerRef.current && <TimeControls time={time} duration={Number(playerRef.current?.duration)} />}
         <div className="player__controls-row">
           {isPlaying ? (
             <button type="button" className="player__play" onClick={handlePause}>
