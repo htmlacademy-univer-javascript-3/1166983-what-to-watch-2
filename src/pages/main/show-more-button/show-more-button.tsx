@@ -2,10 +2,10 @@ import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { showMoreFilms } from '../../../store/action.ts';
 
 export default function ShowMoreButton() {
-  const { filteredFilms, filmListMaxLength } = useAppSelector((state) => state.film);
+  const { filteredFilms, filmListLength: currentLength } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 
-  if (filteredFilms.length <= filmListMaxLength) {
+  if (currentLength >= filteredFilms.length) {
     return null;
   }
 

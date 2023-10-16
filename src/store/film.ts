@@ -9,7 +9,7 @@ interface FilmReducerState {
   filmListPortion: FilmPreview[];
   genres: string[];
   selectedGenre: string;
-  filmListMaxLength: number;
+  filmListLength: number;
 }
 
 const initialState: FilmReducerState = {
@@ -18,7 +18,7 @@ const initialState: FilmReducerState = {
   filmListPortion: [],
   genres: [ALL_GENRES],
   selectedGenre: ALL_GENRES,
-  filmListMaxLength: FILM_LIST_PORTION_SIZE,
+  filmListLength: FILM_LIST_PORTION_SIZE,
 };
 
 const filmReducer = createReducer(
@@ -45,18 +45,18 @@ const filmReducer = createReducer(
           ...state,
           selectedGenre: payload,
           filteredFilms,
-          filmListMaxLength: FILM_LIST_PORTION_SIZE,
+          filmListLength: FILM_LIST_PORTION_SIZE,
           filmListPortion: filteredFilms.slice(0, FILM_LIST_PORTION_SIZE)
         }
       );
     });
     builder.addCase(showMoreFilms, (state) => {
-      const newLength = state.filmListMaxLength + FILM_LIST_PORTION_SIZE;
+      const newLength = state.filmListLength + FILM_LIST_PORTION_SIZE;
 
       return (
         {
           ...state,
-          filmListMaxLength: newLength,
+          filmListLength: newLength,
           filmListPortion: state.filteredFilms.slice(0, newLength)
         }
       );

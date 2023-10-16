@@ -9,15 +9,20 @@ export default function FilmCard({ id, name, previewImage, previewVideoLink }: F
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
 
+  function clearPlayerTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
   function handleMouseOver() {
+    clearPlayerTimeout();
     timeoutRef.current = setTimeout(() => setIsHovering(true), 1000);
   }
 
   function handleMouseLeave() {
-    if (timeoutRef.current) {
-      setIsHovering(false);
-      clearTimeout(timeoutRef.current);
-    }
+    clearPlayerTimeout();
+    setIsHovering(false);
   }
 
   useEffect(() => () => {
