@@ -3,6 +3,11 @@ import Footer from '../../components/footer';
 import FilmList from '../../components/film-list';
 import Header from '../../components/header';
 import FilmControls from '../../components/film-controls';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setFilms } from '../../store/action.ts';
+import { useAppSelector } from '../../hooks';
+import GenreList from './genre-list';
 
 interface MainProps {
   selectedFilm: FilmDetails;
@@ -10,6 +15,13 @@ interface MainProps {
 }
 
 export default function Main({ selectedFilm, films }: MainProps) {
+  const filteredFilms: FilmPreview[] = useAppSelector((state) => state.film.filteredFilms);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setFilms(films));
+  }, [dispatch, films]);
+
   return (
     <>
       <section className="film-card">
@@ -55,40 +67,9 @@ export default function Main({ selectedFilm, films }: MainProps) {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <GenreList />
 
-          <FilmList data={films} />
+          <FilmList data={filteredFilms} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
