@@ -162,4 +162,24 @@ export const FILM_DETAILS_MOCK: (FilmDetails & FilmPreview)[] = [
     ],
     runTime: 99,
   },
+  {
+    id: '9',
+    previewImage: 'img/shutter-island.jpg',
+    backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
+    posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
+    videoLink: 'https://url-to-video/video.mp4',
+    isFavorite: false,
+    previewVideoLink: 'https://url-to-video/video.mp4',
+    name: 'Shutter Island',
+    genre: 'Drama',
+    released: 2014,
+    description: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
+    rating: 8.9,
+    scoresCount: 240,
+    director: 'Wes Anderson',
+    starring: [
+      'Bill Murray'
+    ],
+    runTime: 99,
+  },
 ];

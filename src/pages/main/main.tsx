@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { setFilms } from '../../store/action.ts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreList from './genre-list';
+import ShowMoreButton from './show-more-button';
 
 interface MainProps {
   selectedFilm: FilmDetails;
@@ -14,7 +15,7 @@ interface MainProps {
 }
 
 export default function Main({ selectedFilm, films }: MainProps) {
-  const filteredFilms: FilmPreview[] = useAppSelector((state) => state.film.filteredFilms);
+  const { filmListPortion } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -68,11 +69,9 @@ export default function Main({ selectedFilm, films }: MainProps) {
 
           <GenreList />
 
-          <FilmList data={filteredFilms} />
+          <FilmList data={filmListPortion} />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ShowMoreButton />
         </section>
         <Footer />
       </div>
