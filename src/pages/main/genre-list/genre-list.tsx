@@ -1,16 +1,16 @@
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import classNames from 'classnames';
 import { setSelectedGenre } from '../../../store/action.ts';
-import { useEffect } from 'react';
-import { ALL_GENRES } from '../../../constants/film.ts';
 
 export default function GenreList() {
   const { genres, selectedGenre } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(setSelectedGenre(ALL_GENRES));
-  }, [dispatch]);
+  function handleGenreChange(value: string) {
+    if (value !== selectedGenre) {
+      dispatch(setSelectedGenre(value));
+    }
+  }
 
   return (
     <ul className="catalog__genres-list">
@@ -18,7 +18,7 @@ export default function GenreList() {
         <li
           key={genre}
           className={classNames('catalog__genres-item', genre === selectedGenre && 'catalog__genres-item--active')}
-          onClick={() => dispatch(setSelectedGenre(genre))}
+          onClick={() => handleGenreChange(genre)}
         >
           <span className="catalog__genres-link">{genre}</span>
         </li>
