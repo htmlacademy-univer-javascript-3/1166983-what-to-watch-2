@@ -11,6 +11,9 @@ import MyList from '../../pages/my-list';
 import PrivateRoute from '../private-route';
 import { PlayerProps } from '../../pages/player/player.tsx';
 import { Review } from '../../types/review.ts';
+import { useAppDispatch } from '../../hooks';
+import { useEffect } from 'react';
+import { loadFilms } from '../../store/api-actions.ts';
 
 interface AppProps {
   films: (FilmDetails & FilmPreview)[];
@@ -19,10 +22,16 @@ interface AppProps {
 }
 
 export default function App({ films, playerData, reviews }: AppProps) {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadFilms());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoutes.Main} element={<Main films={films} selectedFilm={films[0]} />} />
+        <Route path={AppRoutes.Main} element={<Main selectedFilm={films[0]} />} />
         <Route path={AppRoutes.SignIn} element={<SignIn />} />
         <Route
           path={AppRoutes.MyList}

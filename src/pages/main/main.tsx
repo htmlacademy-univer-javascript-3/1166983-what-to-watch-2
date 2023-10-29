@@ -1,26 +1,18 @@
-import type { FilmDetails, FilmPreview } from '../../types/film.ts';
+import type { FilmDetails } from '../../types/film.ts';
 import Footer from '../../components/footer';
 import FilmList from '../../components/film-list';
 import Header from '../../components/header';
 import FilmControls from '../../components/film-controls';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import GenreList from './genre-list';
 import ShowMoreButton from './show-more-button';
-import { setFilms } from '../../store/film.ts';
 
 interface MainProps {
   selectedFilm: FilmDetails;
-  films: FilmPreview[];
 }
 
-export default function Main({ selectedFilm, films }: MainProps) {
+export default function Main({ selectedFilm }: MainProps) {
   const { filmListPortion } = useAppSelector((state) => state.film);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setFilms(films));
-  }, [dispatch, films]);
 
   return (
     <>
