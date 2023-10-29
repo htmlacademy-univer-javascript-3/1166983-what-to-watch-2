@@ -1,6 +1,5 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ALL_GENRES, FILM_LIST_PORTION_SIZE } from '../constants/film.ts';
-import { setFilms, setSelectedGenre, showMoreFilms } from './action.ts';
 import { FilmPreview } from '../types/film.ts';
 
 interface FilmReducerState {
@@ -21,36 +20,37 @@ const initialState: FilmReducerState = {
   filmListLength: FILM_LIST_PORTION_SIZE,
 };
 
-const filmReducer = createReducer(
+const filmSlice = createSlice({
+  name: 'film',
   initialState,
-  (builder) => {
-    builder.addCase(setFilms, (state, { payload }) => (
+  reducers: {
+    setFilms: (state, action: PayloadAction<FilmPreview[]>) => (
       {
         ...state,
         ...initialState,
-        genres: [ALL_GENRES, ...new Set(payload.map(({ genre }) => genre))],
-        films: payload,
-        filteredFilms: payload,
-        filmListPortion: payload.slice(0, FILM_LIST_PORTION_SIZE),
+        genres: [ALL_GENRES, ...new Set(action.payload.map(({ genre }) => genre))],
+        films: action.payload,
+        filteredFilms: action.payload,
+        filmListPortion: action.payload.slice(0, FILM_LIST_PORTION_SIZE),
       }
-    ));
-    builder.addCase(setSelectedGenre, (state, { payload }) => {
+    ),
+    setSelectedGenre: (state, action: PayloadAction<string>) => {
       const filteredFilms =
-        payload === ALL_GENRES
+        action.payload === ALL_GENRES
           ? state.films
-          : state.films.filter((film) => film.genre === payload);
+          : state.films.filter((film) => film.genre === action.payload);
 
       return (
         {
           ...state,
-          selectedGenre: payload,
+          selectedGenre: action.payload,
           filteredFilms,
           filmListLength: FILM_LIST_PORTION_SIZE,
           filmListPortion: filteredFilms.slice(0, FILM_LIST_PORTION_SIZE)
         }
       );
-    });
-    builder.addCase(showMoreFilms, (state) => {
+    },
+    showMoreFilms: (state) => {
       const newLength = state.filmListLength + FILM_LIST_PORTION_SIZE;
 
       return (
@@ -60,7 +60,9 @@ const filmReducer = createReducer(
           filmListPortion: state.filteredFilms.slice(0, newLength)
         }
       );
-    });
-  });
+    }
+  }
+});
 
-export default filmReducer;
+export const { setFilms, setSelectedGenre, showMoreFilms } = filmSlice.actions;
+export default filmSlice.reducer;

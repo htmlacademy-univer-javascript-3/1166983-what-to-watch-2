@@ -4,10 +4,10 @@ import FilmList from '../../components/film-list';
 import Header from '../../components/header';
 import FilmControls from '../../components/film-controls';
 import { useEffect } from 'react';
-import { setFilms } from '../../store/action.ts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreList from './genre-list';
 import ShowMoreButton from './show-more-button';
+import { setFilms } from '../../store/film.ts';
 
 interface MainProps {
   selectedFilm: FilmDetails;
