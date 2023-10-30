@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ALL_GENRES, FILM_LIST_PORTION_SIZE, SUGGESTIONS_PORTION_SIZE } from '../constants/film.ts';
+import { ALL_GENRES, FILM_LIST_PORTION_SIZE, SUGGESTION_PORTION_SIZE } from '../constants/film.ts';
 import { FilmDetails, FilmPreview } from '../types/film.ts';
 import { loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions } from './api-actions.ts';
 
@@ -87,7 +87,7 @@ const filmSlice = createSlice({
       {
         ...state,
         suggestions: action.payload,
-        suggestionPortion: action.payload.slice(0, SUGGESTIONS_PORTION_SIZE),
+        suggestionPortion: action.payload.slice(0, SUGGESTION_PORTION_SIZE),
       }
     ));
   },
