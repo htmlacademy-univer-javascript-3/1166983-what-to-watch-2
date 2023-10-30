@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import classNames from 'classnames';
-import { setSelectedGenre } from '../../../store/action.ts';
+import { setSelectedGenre } from '../../../store/film.ts';
 
 export default function GenreList() {
   const { genres, selectedGenre } = useAppSelector((state) => state.film);
