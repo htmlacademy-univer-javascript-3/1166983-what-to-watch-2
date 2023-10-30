@@ -9,24 +9,21 @@ import Player from '../../pages/player';
 import NotFoundScreen from '../../pages/not-found-screen';
 import MyList from '../../pages/my-list';
 import PrivateRoute from '../private-route';
-import { PlayerProps } from '../../pages/player/player.tsx';
 import { Review } from '../../types/review.ts';
 import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
-import { loadFilms, loadPromoFilm } from '../../store/api-actions.ts';
+import { loadFilms } from '../../store/api-actions.ts';
 
 interface AppProps {
   films: (FilmDetails & FilmPreview)[];
-  playerData: PlayerProps;
   reviews: Review[];
 }
 
-export default function App({ films, playerData, reviews }: AppProps) {
+export default function App({ films, reviews }: AppProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(loadFilms());
-    dispatch(loadPromoFilm());
   }, [dispatch]);
 
   return (
@@ -51,7 +48,7 @@ export default function App({ films, playerData, reviews }: AppProps) {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Player} element={<Player {...playerData} />} />
+        <Route path={AppRoutes.Player} element={<Player />} />
         <Route path={AppRoutes.NotFoundScreen} element={<NotFoundScreen />} />
       </Routes>
     </BrowserRouter>

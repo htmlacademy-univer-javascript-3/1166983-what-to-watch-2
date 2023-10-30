@@ -5,68 +5,76 @@ import { FilmDetails, FilmPreview } from '../../types/film.ts';
 import FilmControls from '../../components/film-controls';
 import FilmTabs from './film-tabs';
 import { Review } from '../../types/review.ts';
+import RequestSuspense from '../../components/request-suspense';
+import { useSelectedFilm } from '../../hooks/useSelectedFilm.ts';
 
 interface FilmProps extends FilmDetails {
   suggestions: FilmPreview [];
   reviews: Review[];
 }
 
-export default function Film({ reviews, suggestions, ...filmData }: FilmProps) {
+export default function Film({ reviews, suggestions }: FilmProps) {
+  const selectedFilm = useSelectedFilm();
+
   return (
-    <>
-      <section className="film-card film-card--full">
-        <div className="film-card__hero">
-          <div className="film-card__bg">
-            <img src={filmData.backgroundImage} alt={filmData.name} />
-          </div>
+    <RequestSuspense>
+      <>
+        {selectedFilm && (
+          <section className="film-card film-card--full" style={{backgroundColor: selectedFilm.backgroundColor}}>
+            <div className="film-card__hero">
+              <div className="film-card__bg">
+                <img src={selectedFilm.backgroundImage} alt={selectedFilm.name} />
+              </div>
 
-          <h1 className="visually-hidden">WTW</h1>
+              <h1 className="visually-hidden">WTW</h1>
 
-          <Header className="film-card__head">
-            <Header.Logo />
-            <Header.UserBlock />
-          </Header>
+              <Header className="film-card__head">
+                <Header.Logo />
+                <Header.UserBlock />
+              </Header>
 
-          <div className="film-card__wrap">
-            <div className="film-card__desc">
-              <h2 className="film-card__title">{filmData.name}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{filmData.genre}</span>
-                <span className="film-card__year">{filmData.released}</span>
-              </p>
+              <div className="film-card__wrap">
+                <div className="film-card__desc">
+                  <h2 className="film-card__title">{selectedFilm.name}</h2>
+                  <p className="film-card__meta">
+                    <span className="film-card__genre">{selectedFilm.genre}</span>
+                    <span className="film-card__year">{selectedFilm.released}</span>
+                  </p>
 
-              <FilmControls>
-                <FilmControls.PlayLink id={filmData.id} />
-                <FilmControls.MyListButton />
-                <FilmControls.AddReviewLink id={filmData.id} />
-              </FilmControls>
+                  <FilmControls>
+                    <FilmControls.PlayLink id={selectedFilm.id} />
+                    <FilmControls.MyListButton />
+                    <FilmControls.AddReviewLink id={selectedFilm.id} />
+                  </FilmControls>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div className="film-card__wrap film-card__translate-top">
-          <div className="film-card__info">
-            <div className="film-card__poster film-card__poster--big">
-              <img
-                src={filmData.posterImage}
-                alt={`${filmData.name} poster`}
-                width="218"
-                height="327"
-              />
+            <div className="film-card__wrap film-card__translate-top">
+              <div className="film-card__info">
+                <div className="film-card__poster film-card__poster--big">
+                  <img
+                    src={selectedFilm.posterImage}
+                    alt={`${selectedFilm.name} poster`}
+                    width="218"
+                    height="327"
+                  />
+                </div>
+                <FilmTabs reviews={reviews} {...selectedFilm} />
+              </div>
             </div>
-            <FilmTabs reviews={reviews} {...filmData} />
-          </div>
+          </section>
+        )}
+
+        <div className="page-content">
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+
+            <FilmList data={suggestions} />
+          </section>
+          <Footer />
         </div>
-      </section>
-
-      <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
-
-          <FilmList data={suggestions} />
-        </section>
-        <Footer />
-      </div>
-    </>
+      </>
+    </RequestSuspense>
   );
 }

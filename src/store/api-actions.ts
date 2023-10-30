@@ -9,7 +9,13 @@ export const loadFilms = createAsyncThunk<FilmPreview[], undefined, AsyncActionC
 );
 
 export const loadPromoFilm = createAsyncThunk<FilmDetails, undefined, AsyncActionConfig>(
-  'films/promoFilm',
+  'films/loadPromoFilm',
   async (_arg, {extra: api}) =>
     (await api.get<FilmDetails>('/promo')).data,
+);
+
+export const loadFilmDetails = createAsyncThunk<FilmDetails, string, AsyncActionConfig>(
+  'films/loadFilmDetails',
+  async (id: string, {extra: api}) =>
+    (await api.get<FilmDetails>(`/films/${id}`)).data,
 );

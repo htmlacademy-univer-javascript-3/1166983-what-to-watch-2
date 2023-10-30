@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ALL_GENRES, FILM_LIST_PORTION_SIZE } from '../constants/film.ts';
 import { FilmDetails, FilmPreview } from '../types/film.ts';
-import { loadFilms, loadPromoFilm } from './api-actions.ts';
+import { loadFilmDetails, loadFilms, loadPromoFilm } from './api-actions.ts';
 
 interface FilmSliceState {
   promoFilm?: FilmDetails;
+  selectedFilm?: FilmDetails;
   films: FilmPreview[];
   filteredFilms: FilmPreview[];
   filmListPortion: FilmPreview[];
@@ -69,6 +70,12 @@ const filmSlice = createSlice({
       {
         ...state,
         promoFilm: action.payload,
+      }
+    ));
+    builder.addCase(loadFilmDetails.fulfilled, (state, action: PayloadAction<FilmDetails>) => (
+      {
+        ...state,
+        selectedFilm: action.payload,
       }
     ));
   },

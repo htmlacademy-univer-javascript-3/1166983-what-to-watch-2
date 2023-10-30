@@ -2,13 +2,20 @@ import Footer from '../../components/footer';
 import FilmList from '../../components/film-list';
 import Header from '../../components/header';
 import FilmControls from '../../components/film-controls';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreList from './genre-list';
 import ShowMoreButton from './show-more-button';
 import RequestSuspense from '../../components/request-suspense';
+import { useEffect } from 'react';
+import { loadPromoFilm } from '../../store/api-actions.ts';
 
 export default function Main() {
   const { filmListPortion, promoFilm } = useAppSelector((state) => state.film);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadPromoFilm());
+  }, [dispatch]);
 
   return (
     <RequestSuspense>
