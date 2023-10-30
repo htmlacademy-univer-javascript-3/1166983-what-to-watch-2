@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AsyncActionConfig } from '../types/state.ts';
 import { FilmDetails, FilmPreview } from '../types/film.ts';
 import { Review } from '../types/review.ts';
+import { UserCredentials, UserData } from '../types/user.ts';
 
 export const loadFilms = createAsyncThunk<FilmPreview[], undefined, AsyncActionConfig>(
   'films/loadFilms',
@@ -31,4 +32,10 @@ export const loadReviews = createAsyncThunk<Review[], string, AsyncActionConfig>
   'reviews/loadReviews',
   async (filmId: string, {extra: api}) =>
     (await api.get<Review[]>(`/comments/${filmId}`)).data,
+);
+
+export const signIn = createAsyncThunk<UserData, UserCredentials, AsyncActionConfig>(
+  'user/signIn',
+  async ({email, password}: UserCredentials, {extra: api}) =>
+    (await api.post<UserData>('/login', {email, password})).data,
 );
