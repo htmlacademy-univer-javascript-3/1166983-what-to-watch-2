@@ -39,7 +39,7 @@ export default function App({ films, reviews }: AppProps) {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Film} element={<Film {...films[0]} suggestions={films} reviews={reviews} />} />
+        <Route path={AppRoutes.Film} element={<Film reviews={reviews} />} />
         <Route
           path={AppRoutes.AddReview}
           element={

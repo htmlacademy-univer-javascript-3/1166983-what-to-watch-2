@@ -13,7 +13,7 @@ export default function Player() {
   const [time, setTime] = useState<number>(0);
   const navigate = useNavigate();
   const { id = '' } = useParams();
-  const selectedFilm = useSelectedFilm();
+  const { selectedFilm } = useSelectedFilm({});
 
   function handlePlay() {
     playerRef.current?.play();

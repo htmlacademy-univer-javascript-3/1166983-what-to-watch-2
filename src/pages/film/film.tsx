@@ -1,26 +1,27 @@
 import Footer from '../../components/footer';
 import Header from '../../components/header';
 import FilmList from '../../components/film-list';
-import { FilmDetails, FilmPreview } from '../../types/film.ts';
 import FilmControls from '../../components/film-controls';
 import FilmTabs from './film-tabs';
 import { Review } from '../../types/review.ts';
 import RequestSuspense from '../../components/request-suspense';
 import { useSelectedFilm } from '../../hooks/useSelectedFilm.ts';
 
-interface FilmProps extends FilmDetails {
-  suggestions: FilmPreview [];
+interface FilmProps {
   reviews: Review[];
 }
 
-export default function Film({ reviews, suggestions }: FilmProps) {
-  const selectedFilm = useSelectedFilm();
+export default function Film({ reviews }: FilmProps) {
+  const { selectedFilm, suggestions } = useSelectedFilm({
+    shouldLoadReviews: true,
+    shouldLoadSuggestions: true
+  });
 
   return (
     <RequestSuspense>
       <>
         {selectedFilm && (
-          <section className="film-card film-card--full" style={{backgroundColor: selectedFilm.backgroundColor}}>
+          <section className="film-card film-card--full" style={{ backgroundColor: selectedFilm.backgroundColor }}>
             <div className="film-card__hero">
               <div className="film-card__bg">
                 <img src={selectedFilm.backgroundImage} alt={selectedFilm.name} />
