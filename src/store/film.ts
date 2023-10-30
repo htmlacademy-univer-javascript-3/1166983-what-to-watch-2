@@ -5,7 +5,7 @@ import { loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions } from './ap
 
 interface FilmSliceState {
   suggestions: FilmPreview[];
-  suggestionsPortion: FilmPreview[];
+  suggestionPortion: FilmPreview[];
   promoFilm?: FilmDetails;
   selectedFilm?: FilmDetails;
   films: FilmPreview[];
@@ -18,7 +18,7 @@ interface FilmSliceState {
 
 const initialState: FilmSliceState = {
   suggestions: [],
-  suggestionsPortion: [],
+  suggestionPortion: [],
   films: [],
   filteredFilms: [],
   filmListPortion: [],
@@ -87,7 +87,7 @@ const filmSlice = createSlice({
       {
         ...state,
         suggestions: action.payload,
-        suggestionsPortion: action.payload.slice(0, SUGGESTIONS_PORTION_SIZE),
+        suggestionPortion: action.payload.slice(0, SUGGESTIONS_PORTION_SIZE),
       }
     ));
   },
