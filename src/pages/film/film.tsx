@@ -3,16 +3,11 @@ import Header from '../../components/header';
 import FilmList from '../../components/film-list';
 import FilmControls from '../../components/film-controls';
 import FilmTabs from './film-tabs';
-import { Review } from '../../types/review.ts';
 import RequestSuspense from '../../components/request-suspense';
 import { useSelectedFilm } from '../../hooks/useSelectedFilm.ts';
 
-interface FilmProps {
-  reviews: Review[];
-}
-
-export default function Film({ reviews }: FilmProps) {
-  const { selectedFilm, suggestionPortion } = useSelectedFilm({
+export default function Film() {
+  const { selectedFilm, suggestionPortion, reviews } = useSelectedFilm({
     shouldLoadReviews: true,
     shouldLoadSuggestions: true
   });

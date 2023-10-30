@@ -9,17 +9,15 @@ import Player from '../../pages/player';
 import NotFoundScreen from '../../pages/not-found-screen';
 import MyList from '../../pages/my-list';
 import PrivateRoute from '../private-route';
-import { Review } from '../../types/review.ts';
 import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
 import { loadFilms } from '../../store/api-actions.ts';
 
 interface AppProps {
   films: (FilmDetails & FilmPreview)[];
-  reviews: Review[];
 }
 
-export default function App({ films, reviews }: AppProps) {
+export default function App({ films }: AppProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -39,7 +37,7 @@ export default function App({ films, reviews }: AppProps) {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Film} element={<Film reviews={reviews} />} />
+        <Route path={AppRoutes.Film} element={<Film />} />
         <Route
           path={AppRoutes.AddReview}
           element={
