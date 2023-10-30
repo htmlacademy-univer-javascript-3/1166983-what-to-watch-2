@@ -3,7 +3,7 @@ import { ALL_GENRES, FILM_LIST_PORTION_SIZE } from '../constants/film.ts';
 import { FilmPreview } from '../types/film.ts';
 import { loadFilms } from './api-actions.ts';
 
-interface FilmReducerState {
+interface FilmSliceState {
   films: FilmPreview[];
   filteredFilms: FilmPreview[];
   filmListPortion: FilmPreview[];
@@ -12,7 +12,7 @@ interface FilmReducerState {
   filmListLength: number;
 }
 
-const initialState: FilmReducerState = {
+const initialState: FilmSliceState = {
   films: [],
   filteredFilms: [],
   filmListPortion: [],
@@ -25,16 +25,6 @@ const filmSlice = createSlice({
   name: 'film',
   initialState,
   reducers: {
-    setFilms: (state, action: PayloadAction<FilmPreview[]>) => (
-      {
-        ...state,
-        ...initialState,
-        genres: [ALL_GENRES, ...new Set(action.payload.map(({ genre }) => genre))],
-        films: action.payload,
-        filteredFilms: action.payload,
-        filmListPortion: action.payload.slice(0, FILM_LIST_PORTION_SIZE),
-      }
-    ),
     setSelectedGenre: (state, action: PayloadAction<string>) => {
       const filteredFilms =
         action.payload === ALL_GENRES
@@ -77,5 +67,5 @@ const filmSlice = createSlice({
   },
 });
 
-export const { setFilms, setSelectedGenre, showMoreFilms } = filmSlice.actions;
+export const { setSelectedGenre, showMoreFilms } = filmSlice.actions;
 export default filmSlice.reducer;
