@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loadFilms } from './api-actions.ts';
+import { loadFilms, loadPromoFilm } from './api-actions.ts';
 
 interface AppSliceState {
   pendingRequestsCount: number;
@@ -24,6 +24,8 @@ const appSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loadFilms.pending, increaseCount);
     builder.addCase(loadFilms.fulfilled, decreaseCount);
+    builder.addCase(loadPromoFilm.pending, increaseCount);
+    builder.addCase(loadPromoFilm.fulfilled, decreaseCount);
   },
 });
 
