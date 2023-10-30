@@ -16,7 +16,7 @@ export default function Player({ name, videoLink, posterImage }: PlayerProps) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const navigate = useNavigate();
-  const id = Number(useParams().id);
+  const { id = '' } = useParams();
 
   function handlePlay() {
     playerRef.current?.play();
@@ -46,7 +46,7 @@ export default function Player({ name, videoLink, posterImage }: PlayerProps) {
       <button
         type="button"
         className="player__exit"
-        onClick={() => navigate(AppRoutes.Film.replace(':id', id.toString()))}
+        onClick={() => navigate(AppRoutes.Film.replace(':id', id))}
       >
         Exit
       </button>
