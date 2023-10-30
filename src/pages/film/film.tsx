@@ -12,7 +12,7 @@ interface FilmProps {
 }
 
 export default function Film({ reviews }: FilmProps) {
-  const { selectedFilm, suggestions } = useSelectedFilm({
+  const { selectedFilm, suggestionsPortion } = useSelectedFilm({
     shouldLoadReviews: true,
     shouldLoadSuggestions: true
   });
@@ -71,7 +71,7 @@ export default function Film({ reviews }: FilmProps) {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
 
-            <FilmList data={suggestions} />
+            <FilmList data={suggestionsPortion} />
           </section>
           <Footer />
         </div>
