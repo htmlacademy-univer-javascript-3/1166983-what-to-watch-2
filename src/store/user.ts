@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { signIn, signOut } from './api-actions.ts';
+import { signIn, signOut, verifyToken } from './api-actions.ts';
 import { UserData } from '../types/user.ts';
 
 interface UserSliceState extends UserData {
@@ -14,6 +14,14 @@ const initialState: UserSliceState = {
   token: '',
 };
 
+function authorize(state: UserSliceState, action: PayloadAction<UserData>) {
+  return {
+    ...state,
+    ...action.payload,
+    isAuthorized: true,
+  };
+}
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -26,13 +34,8 @@ const userSlice = createSlice({
     )
   },
   extraReducers: (builder) => {
-    builder.addCase(signIn.fulfilled, (state, action: PayloadAction<UserData>) => (
-      {
-        ...state,
-        ...action.payload,
-        isAuthorized: true,
-      }
-    ));
+    builder.addCase(signIn.fulfilled, authorize);
+    builder.addCase(verifyToken.fulfilled, authorize);
     builder.addCase(signOut.fulfilled, () => initialState);
   },
 });
