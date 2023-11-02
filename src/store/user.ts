@@ -25,14 +25,7 @@ function authorize(state: UserSliceState, action: PayloadAction<UserData>) {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setIsAuthorized: (state, action: PayloadAction<boolean>) => (
-      {
-        ...state,
-        isAuthorized: action.payload,
-      }
-    )
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(signIn.fulfilled, authorize);
     builder.addCase(verifyToken.fulfilled, authorize);
