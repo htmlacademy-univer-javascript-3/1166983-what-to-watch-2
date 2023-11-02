@@ -1,24 +1,27 @@
 import Footer from '../../components/footer';
 import Header from '../../components/header';
 import FilmList from '../../components/film-list';
-import { FilmPreview } from '../../types/film.ts';
+import { useFavouriteFilms } from '../../hooks/useFavouriteFilms.ts';
 
-interface FilmListProps {
-  films: FilmPreview [];
-}
+export default function MyList() {
+  const { favouriteFilms } = useFavouriteFilms();
 
-export default function MyList({films}: FilmListProps) {
   return (
     <div className="user-page">
       <Header className="user-page__head">
         <Header.Logo />
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">
+          My list
+          <span className="user-page__film-count">
+            {favouriteFilms?.length}
+          </span>
+        </h1>
         <Header.UserBlock />
       </Header>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmList data={films} />
+        <FilmList data={favouriteFilms} />
       </section>
       <Footer />
     </div>

@@ -8,8 +8,10 @@ import ShowMoreButton from './show-more-button';
 import RequestSuspense from '../../components/request-suspense';
 import { useEffect } from 'react';
 import { loadPromoFilm } from '../../store/api-actions.ts';
+import { useFavouriteFilms } from '../../hooks/useFavouriteFilms.ts';
 
 export default function Main() {
+  const { favouriteFilms } = useFavouriteFilms();
   const { filmListPortion, promoFilm } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 
@@ -53,7 +55,7 @@ export default function Main() {
 
                   <FilmControls>
                     <FilmControls.PlayLink id={promoFilm.id} />
-                    <FilmControls.MyListButton />
+                    <FilmControls.MyListButton listLength={favouriteFilms?.length} />
                   </FilmControls>
                 </div>
               </div>

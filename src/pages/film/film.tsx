@@ -5,12 +5,14 @@ import FilmControls from '../../components/film-controls';
 import FilmTabs from './film-tabs';
 import RequestSuspense from '../../components/request-suspense';
 import { useSelectedFilm } from '../../hooks/useSelectedFilm.ts';
+import { useFavouriteFilms } from '../../hooks/useFavouriteFilms.ts';
 
 export default function Film() {
   const { selectedFilm, suggestionPortion, reviews } = useSelectedFilm({
     shouldLoadReviews: true,
     shouldLoadSuggestions: true
   });
+  const { favouriteFilms } = useFavouriteFilms();
 
   return (
     <RequestSuspense>
@@ -39,7 +41,7 @@ export default function Film() {
 
                   <FilmControls>
                     <FilmControls.PlayLink id={selectedFilm.id} />
-                    <FilmControls.MyListButton />
+                    <FilmControls.MyListButton listLength={favouriteFilms?.length} />
                     <FilmControls.AddReviewLink id={selectedFilm.id} />
                   </FilmControls>
                 </div>

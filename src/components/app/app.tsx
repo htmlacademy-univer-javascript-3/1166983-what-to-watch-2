@@ -39,7 +39,7 @@ export default function App({ films }: AppProps) {
           path={AppRoutes.MyList}
           element={
             <PrivateRoute>
-              <MyList films={films} />
+              <MyList />
             </PrivateRoute>
           }
         />
