@@ -1,10 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../../types/routes.ts';
-import { useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { signOut } from '../../../store/api-actions.ts';
 
 export default function UserBlock() {
-  const {isAuthorized, avatarUrl} = useAppSelector((state) => state.user);
+  const { isAuthorized, avatarUrl } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     isAuthorized ? (
@@ -14,7 +16,12 @@ export default function UserBlock() {
             <img src={avatarUrl} alt="User avatar" width="63" height="63" />
           </div>
         </li>
-        <li className="user-block__item">
+        <li
+          className="user-block__item"
+          onClick={() => {
+            dispatch(signOut());
+          }}
+        >
           <Link to={AppRoutes.Main} className="user-block__link">Sign out</Link>
         </li>
       </ul>
