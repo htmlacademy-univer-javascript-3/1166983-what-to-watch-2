@@ -9,3 +9,9 @@ export interface UserData {
   email: string;
   token: string;
 }
+
+export enum AuthorizationStatus {
+  Unknown = 'Unknown',
+  Authorized = 'Authorized',
+  Unauthorized = 'Unauthorized',
+}

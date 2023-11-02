@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../../types/routes.ts';
 import { useAppSelector } from '../../../hooks';
+import { AuthorizationStatus } from '../../../types/user.ts';
 
 interface AddReviewLinkProps {
   id: string;
 }
 
 export default function AddReviewLink({ id }: AddReviewLinkProps) {
-  const { isAuthorized } = useAppSelector((state) => state.user);
+  const { authorizationStatus } = useAppSelector((state) => state.user);
 
-  return isAuthorized ? (
+  return authorizationStatus === AuthorizationStatus.Authorized ? (
     <Link
       to={AppRoutes.AddReview.replace(':id', id)}
       className="btn film-card__button"
