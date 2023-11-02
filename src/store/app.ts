@@ -6,6 +6,8 @@ import {
   loadPromoFilm,
   loadReviews,
   loadSuggestions,
+  signIn,
+  signOut,
   verifyToken
 } from './api-actions.ts';
 
@@ -43,6 +45,10 @@ const appSlice = createSlice({
     builder.addCase(verifyToken.pending, increaseCount);
     builder.addCase(verifyToken.fulfilled, decreaseCount);
     builder.addCase(verifyToken.rejected, decreaseCount);
+    builder.addCase(signOut.pending, increaseCount);
+    builder.addCase(signOut.fulfilled, decreaseCount);
+    builder.addCase(signIn.pending, increaseCount);
+    builder.addCase(signIn.fulfilled, decreaseCount);
     builder.addCase(loadFavouriteFilms.pending, increaseCount);
     builder.addCase(loadFavouriteFilms.fulfilled, decreaseCount);
   },

@@ -22,7 +22,7 @@ export default function UserBlock() {
             dispatch(signOut());
           }}
         >
-          <Link to={AppRoutes.Main} className="user-block__link">Sign out</Link>
+          <span className="user-block__link">Sign out</span>
         </li>
       </ul>
     ) : (
