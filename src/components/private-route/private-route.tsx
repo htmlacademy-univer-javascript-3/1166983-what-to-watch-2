@@ -1,13 +1,15 @@
-import {Navigate} from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { ReactElement } from 'react';
 import { AppRoutes } from '../../types/routes.ts';
+import { useAppSelector } from '../../hooks';
 
 interface PrivateRouteProps {
-  isAuthorized?: boolean;
   children: ReactElement;
 }
 
-export default function PrivateRoute({isAuthorized = false, children}: PrivateRouteProps) {
+export default function PrivateRoute({ children }: PrivateRouteProps) {
+  const { isAuthorized } = useAppSelector((state) => state.user);
+
   return (
     isAuthorized
       ? children

@@ -11,17 +11,23 @@ import MyList from '../../pages/my-list';
 import PrivateRoute from '../private-route';
 import { useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
-import { loadFilms } from '../../store/api-actions.ts';
+import { loadFilms, verifyToken } from '../../store/api-actions.ts';
+import { getToken } from '../../services/storage.ts';
 
 interface AppProps {
   films: (FilmDetails & FilmPreview)[];
 }
+
+const token = getToken();
 
 export default function App({ films }: AppProps) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(loadFilms());
+    if (token) {
+      dispatch(verifyToken());
+    }
   }, [dispatch]);
 
   return (
