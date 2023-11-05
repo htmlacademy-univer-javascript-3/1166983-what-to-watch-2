@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './index.ts';
 import { useEffect } from 'react';
 import { loadFilmDetails, loadSuggestions, loadReviews } from '../store/api-actions.ts';
@@ -13,10 +13,11 @@ export function useSelectedFilm({ shouldLoadSuggestions = false, shouldLoadRevie
   const { selectedFilm, suggestionPortion } = useAppSelector((state) => state.film);
   const { reviews } = useAppSelector((state) => state.reviews);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(loadFilmDetails(id));
-  }, [dispatch, id]);
+    dispatch(loadFilmDetails({id, navigate}));
+  }, [dispatch, id, navigate]);
 
   useEffect(() => {
     if (shouldLoadSuggestions) {

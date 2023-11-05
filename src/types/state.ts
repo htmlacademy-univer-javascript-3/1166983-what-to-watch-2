@@ -1,4 +1,4 @@
-import {store} from '../store';
+import { store } from '../store';
 import { AxiosInstance } from 'axios';
 
 export type State = ReturnType<typeof store.getState>;
@@ -10,3 +10,6 @@ export type AsyncActionConfig = {
   state: State;
   extra: AxiosInstance;
 };
+
+export type WithNavigate<T> = { navigate: (route: string) => void } & T;
+

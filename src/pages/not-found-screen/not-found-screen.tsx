@@ -1,12 +1,22 @@
-import { Link } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.ts';
 import './not-found-screen.css';
+import { useAppDispatch } from '../../hooks';
+import { clearRequestCount } from '../../store/api-actions.ts';
+import { useNavigate } from 'react-router-dom';
 
 export default function NotFoundScreen() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  function handleRedirect() {
+    dispatch(clearRequestCount())
+      .then(() => navigate(AppRoutes.Main));
+  }
+
   return (
     <div className="not-found-description">
       <span>Ошибка 404. Страница не найдена</span>
-      <Link to={AppRoutes.Main}>Вернуться на главную страницу</Link>
+      <button onClick={handleRedirect}>Вернуться на главную страницу</button>
     </div>
   );
 }
