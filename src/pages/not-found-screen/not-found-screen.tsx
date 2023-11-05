@@ -16,7 +16,7 @@ export default function NotFoundScreen() {
   return (
     <div className="not-found-description">
       <span>Ошибка 404. Страница не найдена</span>
-      <button onClick={handleRedirect}>Вернуться на главную страницу</button>
+      <button className="redirect-button" onClick={handleRedirect}>Вернуться на главную страницу</button>
     </div>
   );
 }

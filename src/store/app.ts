@@ -51,6 +51,7 @@ const appSlice = createSlice({
       builder.addCase(signOut.fulfilled, decreaseCount);
       builder.addCase(signIn.pending, increaseCount);
       builder.addCase(signIn.fulfilled, decreaseCount);
+      builder.addCase(signIn.rejected, decreaseCount);
       builder.addCase(loadFavouriteFilms.pending, increaseCount);
       builder.addCase(loadFavouriteFilms.fulfilled, decreaseCount);
       builder.addCase(clearRequestCount.fulfilled, (state) => {
