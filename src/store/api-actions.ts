@@ -84,8 +84,14 @@ export const clearRequestCount = createAsyncThunk<void, undefined, AsyncActionCo
   () => undefined,
 );
 
-export const addReview = createAsyncThunk<UserData, ReviewFormValues & { filmId: string }, AsyncActionConfig>(
+export const addReview = createAsyncThunk<undefined, ReviewFormValues & { filmId: string }, AsyncActionConfig>(
   'reviews/addReview',
   async ({ filmId, ...requestData }: ReviewFormValues & { filmId: string }, { extra: api }) =>
     await api.post(`/comments/${filmId}`, requestData)
+);
+
+export const setIsFavorite = createAsyncThunk<FilmDetails, { filmId: string; status: number }, AsyncActionConfig>(
+  'films/setIsFavorite',
+  async ({ filmId, status }: { filmId: string; status: number }, { extra: api }) =>
+    (await api.post<FilmDetails>(`/favorite/${filmId}/${status}`)).data
 );

@@ -1,13 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ALL_GENRES, FILM_LIST_PORTION_SIZE, SUGGESTION_PORTION_SIZE } from '../constants/film.ts';
 import { FilmDetails, FilmPreview } from '../types/film.ts';
-import { loadFavouriteFilms, loadFilmDetails, loadFilms, loadPromoFilm, loadSuggestions } from './api-actions.ts';
+import {
+  loadFavouriteFilms,
+  loadFilmDetails,
+  loadFilms,
+  loadPromoFilm,
+  loadSuggestions,
+  setIsFavorite
+} from './api-actions.ts';
 
 interface FilmSliceState {
   suggestions: FilmPreview[];
   favouriteFilms: FilmPreview[];
   suggestionPortion: FilmPreview[];
-  promoFilm?: FilmDetails;
   selectedFilm?: FilmDetails;
   films: FilmPreview[];
   filteredFilms: FilmPreview[];
@@ -28,6 +34,10 @@ const initialState: FilmSliceState = {
   selectedGenre: ALL_GENRES,
   filmListLength: FILM_LIST_PORTION_SIZE,
 };
+
+function setSelectedFilm(state: FilmSliceState, action: PayloadAction<FilmDetails>) {
+  state.selectedFilm = action.payload;
+}
 
 const filmSlice = createSlice({
   name: 'film',
@@ -73,18 +83,9 @@ const filmSlice = createSlice({
         filmListPortion: action.payload.slice(0, FILM_LIST_PORTION_SIZE),
       }
     ));
-    builder.addCase(loadPromoFilm.fulfilled, (state, action: PayloadAction<FilmDetails>) => (
-      {
-        ...state,
-        promoFilm: action.payload,
-      }
-    ));
-    builder.addCase(loadFilmDetails.fulfilled, (state, action: PayloadAction<FilmDetails>) => (
-      {
-        ...state,
-        selectedFilm: action.payload,
-      }
-    ));
+    builder.addCase(loadPromoFilm.fulfilled, setSelectedFilm);
+    builder.addCase(loadFilmDetails.fulfilled, setSelectedFilm);
+    builder.addCase(setIsFavorite.fulfilled, setSelectedFilm);
     builder.addCase(loadSuggestions.fulfilled, (state, action: PayloadAction<FilmPreview[]>) => (
       {
         ...state,
