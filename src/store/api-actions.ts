@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AsyncActionConfig, WithNavigate } from '../types/state.ts';
 import { FilmDetails, FilmPreview } from '../types/film.ts';
-import { Review } from '../types/review.ts';
+import { Review, ReviewFormValues } from '../types/review.ts';
 import { UserCredentials, UserData } from '../types/user.ts';
 import { dropToken, saveToken } from '../services/storage.ts';
 import { StatusCodes } from 'http-status-codes';
@@ -82,4 +82,10 @@ export const loadFavouriteFilms = createAsyncThunk<FilmPreview[], undefined, Asy
 export const clearRequestCount = createAsyncThunk<void, undefined, AsyncActionConfig>(
   'app/clearRequestCount',
   () => undefined,
+);
+
+export const addReview = createAsyncThunk<UserData, ReviewFormValues & { filmId: string }, AsyncActionConfig>(
+  'reviews/addReview',
+  async ({ filmId, ...requestData }: ReviewFormValues & { filmId: string }, { extra: api }) =>
+    await api.post(`/comments/${filmId}`, requestData)
 );
