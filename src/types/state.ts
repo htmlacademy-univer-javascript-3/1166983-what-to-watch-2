@@ -10,6 +10,3 @@ export type AsyncActionConfig = {
   state: State;
   extra: AxiosInstance;
 };
-
-export type WithNavigate<T> = { navigate: (route: string) => void } & T;
-

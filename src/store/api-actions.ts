@@ -1,12 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AsyncActionConfig, WithNavigate } from '../types/state.ts';
+import { AsyncActionConfig } from '../types/state.ts';
 import { FilmDetails, FilmPreview } from '../types/film.ts';
 import { Review, ReviewFormValues } from '../types/review.ts';
 import { UserCredentials, UserData } from '../types/user.ts';
 import { dropToken, saveToken } from '../services/storage.ts';
-import { StatusCodes } from 'http-status-codes';
-import { AxiosError } from 'axios';
-import { NOT_FOUND_URL } from '../constants/route.ts';
 
 export const loadFilms = createAsyncThunk<FilmPreview[], undefined, AsyncActionConfig>(
   'films/loadFilms',
@@ -20,19 +17,10 @@ export const loadPromoFilm = createAsyncThunk<FilmDetails, undefined, AsyncActio
     (await api.get<FilmDetails>('/promo')).data,
 );
 
-export const loadFilmDetails = createAsyncThunk<FilmDetails, WithNavigate<{ id: string }>, AsyncActionConfig>(
+export const loadFilmDetails = createAsyncThunk<FilmDetails, string, AsyncActionConfig>(
   'films/loadFilmDetails',
-  async ({ id, navigate }: WithNavigate<{ id: string }>, { extra: api }) => {
-    try {
-      return (await api.get<FilmDetails>(`/films/${id}`)).data;
-    } catch (error) {
-      if (error instanceof AxiosError && error?.response?.status === StatusCodes.NOT_FOUND) {
-        navigate(NOT_FOUND_URL);
-      }
-
-      throw error;
-    }
-  },
+  async (id: string, { extra: api }) =>
+    (await api.get<FilmDetails>(`/films/${id}`)).data,
 );
 
 export const loadSuggestions = createAsyncThunk<FilmPreview[], string, AsyncActionConfig>(
