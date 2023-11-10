@@ -1,4 +1,4 @@
-import {store} from '../store';
+import { store } from '../store';
 import { AxiosInstance } from 'axios';
 
 export type State = ReturnType<typeof store.getState>;

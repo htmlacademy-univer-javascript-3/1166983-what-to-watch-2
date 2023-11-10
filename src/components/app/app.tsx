@@ -1,5 +1,4 @@
 import Main from '../../pages/main';
-import { FilmDetails, FilmPreview } from '../../types/film.ts';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.ts';
 import Film from '../../pages/film';
@@ -14,13 +13,9 @@ import { useEffect } from 'react';
 import { loadFilms, verifyToken } from '../../store/api-actions.ts';
 import { getToken } from '../../services/storage.ts';
 
-interface AppProps {
-  films: (FilmDetails & FilmPreview)[];
-}
-
 const token = getToken();
 
-export default function App({ films }: AppProps) {
+export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -39,7 +34,7 @@ export default function App({ films }: AppProps) {
           path={AppRoutes.MyList}
           element={
             <PrivateRoute>
-              <MyList films={films} />
+              <MyList />
             </PrivateRoute>
           }
         />
@@ -48,7 +43,7 @@ export default function App({ films }: AppProps) {
           path={AppRoutes.AddReview}
           element={
             <PrivateRoute>
-              <AddReview {...films[0]} />
+              <AddReview />
             </PrivateRoute>
           }
         />

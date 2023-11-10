@@ -8,9 +8,11 @@ import ShowMoreButton from './show-more-button';
 import RequestSuspense from '../../components/request-suspense';
 import { useEffect } from 'react';
 import { loadPromoFilm } from '../../store/api-actions.ts';
+import { useFavouriteFilms } from '../../hooks/useFavouriteFilms.ts';
 
 export default function Main() {
-  const { filmListPortion, promoFilm } = useAppSelector((state) => state.film);
+  const { favouriteFilms } = useFavouriteFilms();
+  const { filmListPortion, selectedFilm } = useAppSelector((state) => state.film);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,10 +22,10 @@ export default function Main() {
   return (
     <RequestSuspense>
       <>
-        {promoFilm && (
+        {selectedFilm && (
           <section className="film-card">
             <div className="film-card__bg">
-              <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
+              <img src={selectedFilm.backgroundImage} alt={selectedFilm.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>
@@ -37,23 +39,23 @@ export default function Main() {
               <div className="film-card__info">
                 <div className="film-card__poster">
                   <img
-                    src={promoFilm.posterImage}
-                    alt={`${promoFilm.name} poster`}
+                    src={selectedFilm.posterImage}
+                    alt={`${selectedFilm.name} poster`}
                     width="218"
                     height="327"
                   />
                 </div>
 
                 <div className="film-card__desc">
-                  <h2 className="film-card__title">{promoFilm.name}</h2>
+                  <h2 className="film-card__title">{selectedFilm.name}</h2>
                   <p className="film-card__meta">
-                    <span className="film-card__genre">{promoFilm.genre}</span>
-                    <span className="film-card__year">{promoFilm.released}</span>
+                    <span className="film-card__genre">{selectedFilm.genre}</span>
+                    <span className="film-card__year">{selectedFilm.released}</span>
                   </p>
 
                   <FilmControls>
-                    <FilmControls.PlayLink id={promoFilm.id} />
-                    <FilmControls.MyListButton />
+                    <FilmControls.PlayLink id={selectedFilm.id} />
+                    <FilmControls.MyListButton listLength={favouriteFilms?.length} />
                   </FilmControls>
                 </div>
               </div>

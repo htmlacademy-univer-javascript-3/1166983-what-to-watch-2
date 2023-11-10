@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { signIn, signOut, verifyToken } from './api-actions.ts';
-import { UserData } from '../types/user.ts';
+import { AuthorizationStatus, UserData } from '../types/user.ts';
+import { getToken } from '../services/storage.ts';
 
 interface UserSliceState extends UserData {
-  isAuthorized: boolean;
+  authorizationStatus: AuthorizationStatus;
 }
 
+const token = getToken();
+
 const initialState: UserSliceState = {
-  isAuthorized: false,
+  authorizationStatus: token ? AuthorizationStatus.Unknown : AuthorizationStatus.Unauthorized,
   name: '',
   avatarUrl: '',
   email: '',
@@ -18,7 +21,7 @@ function authorize(state: UserSliceState, action: PayloadAction<UserData>) {
   return {
     ...state,
     ...action.payload,
-    isAuthorized: true,
+    authorizationStatus: AuthorizationStatus.Authorized,
   };
 }
 
@@ -29,7 +32,10 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(signIn.fulfilled, authorize);
     builder.addCase(verifyToken.fulfilled, authorize);
-    builder.addCase(signOut.fulfilled, () => initialState);
+    builder.addCase(signOut.fulfilled, () => ({
+      ...initialState,
+      authorizationStatus: AuthorizationStatus.Unauthorized
+    }));
   },
 });
 
