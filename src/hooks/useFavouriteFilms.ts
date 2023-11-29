@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from './index.ts';
 import { useEffect } from 'react';
-import { loadFavouriteFilms } from '../store/api-actions.ts';
+import { loadFavoriteFilms } from '../store/api-actions.ts';
 import { AuthorizationStatus } from '../types/user.ts';
 
 export function useFavouriteFilms() {
@@ -10,7 +10,7 @@ export function useFavouriteFilms() {
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Authorized) {
-      dispatch(loadFavouriteFilms());
+      dispatch(loadFavoriteFilms());
     }
   }, [dispatch, authorizationStatus]);
 

@@ -61,8 +61,8 @@ export const signOut = createAsyncThunk<UserData, undefined, AsyncActionConfig>(
   async (_arg, { extra: api }) => await api.delete('/logout')
 );
 
-export const loadFavouriteFilms = createAsyncThunk<FilmPreview[], undefined, AsyncActionConfig>(
-  'films/loadFavouriteFilms',
+export const loadFavoriteFilms = createAsyncThunk<FilmPreview[], undefined, AsyncActionConfig>(
+  'films/loadFavoriteFilms',
   async (_arg, { extra: api }) =>
     (await api.get<FilmPreview[]>('/favorite')).data,
 );
