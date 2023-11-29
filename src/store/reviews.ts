@@ -6,7 +6,7 @@ interface ReviewSliceState {
   reviews: Review[];
 }
 
-const initialState: ReviewSliceState = {
+export const initialState: ReviewSliceState = {
   reviews: [],
 };
 

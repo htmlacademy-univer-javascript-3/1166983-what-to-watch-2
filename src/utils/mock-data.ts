@@ -4,7 +4,7 @@ import { UserData } from '../types/user.ts';
 
 export function mockFilmDetails(): FilmDetails {
   return ({
-    id: faker.datatype.string(),
+    id: faker.datatype.uuid(),
     name: faker.commerce.productName(),
     genre: faker.music.genre(),
     posterImage: faker.image.imageUrl(),

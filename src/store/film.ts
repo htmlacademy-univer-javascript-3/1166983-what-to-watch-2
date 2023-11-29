@@ -24,7 +24,7 @@ interface FilmSliceState {
   filmListLength: number;
 }
 
-const initialState: FilmSliceState = {
+export const initialState: FilmSliceState = {
   favouriteFilms: [],
   suggestions: [],
   suggestionPortion: [],

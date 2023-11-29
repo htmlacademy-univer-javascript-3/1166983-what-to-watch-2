@@ -16,7 +16,7 @@ interface AppSliceState {
   pendingRequestsCount: number;
 }
 
-const initialState: AppSliceState = {
+export const initialState: AppSliceState = {
   pendingRequestsCount: 0,
 };
 

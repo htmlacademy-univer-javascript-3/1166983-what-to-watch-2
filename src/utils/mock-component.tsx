@@ -9,6 +9,10 @@ import { DeepPartial, ThunkDispatch } from '@reduxjs/toolkit';
 import { ReactElement } from 'react';
 import { BrowserHistory, createMemoryHistory } from 'history';
 import HistoryRouter from '../components/history-router';
+import {initialState as filmSliceState} from '../store/film.ts';
+import {initialState as reviewsSliceState} from '../store/reviews.ts';
+import {initialState as appSliceState} from '../store/app.ts';
+import {initialState as userSliceState} from '../store/user.ts';
 
 type ComponentWithMockStore = {
   component: ReactElement;
@@ -29,7 +33,13 @@ export function withProviders(
   const mockAxiosAdapter = new MockAdapter(axios);
   const middleware = [thunk.withExtraArgument(axios)];
   const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
-  const mockStore = mockStoreCreator(initialState);
+  const mockStore = mockStoreCreator({
+    film: filmSliceState,
+    reviews: reviewsSliceState,
+    user: userSliceState,
+    app: appSliceState,
+    ...(initialState ?? {})
+  });
 
   return ({
     component: (

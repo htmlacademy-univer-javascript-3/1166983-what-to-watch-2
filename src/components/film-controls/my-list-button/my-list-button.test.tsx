@@ -7,9 +7,10 @@ import { AuthorizationStatus } from '../../../types/user.ts';
 import { loadFavoriteFilms, setIsFavorite } from '../../../store/api-actions.ts';
 import { extractActionsTypes } from '../../../utils/reducer.ts';
 import { AppRoutes } from '../../../types/routes.ts';
+import * as faker from 'faker';
 
 describe('Component: MyListButton', () => {
-  const mockedListLength = 5;
+  const mockedListLength = faker.datatype.number();
 
   it('should render correctly', () => {
     const { component } = withProviders(<MyListButton listLength={mockedListLength} />, {
