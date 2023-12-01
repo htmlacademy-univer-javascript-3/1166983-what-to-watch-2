@@ -1,8 +1,9 @@
-import { FilmDetails } from '../types/film.ts';
+import { FilmDetails, FilmPreview } from '../types/film.ts';
 import * as faker from 'faker';
 import { UserData } from '../types/user.ts';
+import { VideoPlayerProps } from '../components/video-player/video-player.tsx';
 
-export function mockFilmDetails(): FilmDetails {
+export function mockFilmDetails(): FilmDetails & FilmPreview {
   return ({
     id: faker.datatype.uuid(),
     name: faker.commerce.productName(),
@@ -19,6 +20,8 @@ export function mockFilmDetails(): FilmDetails {
     runTime: faker.datatype.number(),
     released: faker.datatype.number(),
     isFavorite: faker.datatype.boolean(),
+    previewImage: faker.image.imageUrl(),
+    previewVideoLink: faker.internet.url(),
   });
 }
 
@@ -31,4 +34,10 @@ export function mockUserDetails(): UserData {
   });
 }
 
+export function mockPlayerDetails(): VideoPlayerProps {
+  return ({
+    posterImage: faker.image.imageUrl(),
+    videoLink: faker.internet.url(),
+  });
+}
 
