@@ -11,14 +11,16 @@ import * as faker from 'faker';
 
 describe('Component: MyListButton', () => {
   const mockedListLength = faker.datatype.number();
+  const mockedFilmDetails = mockFilmDetails();
+  const mockedUserDetails = mockUserDetails();
 
   it('should render correctly', () => {
     const { component } = withProviders(<MyListButton listLength={mockedListLength} />, {
       film: {
-        selectedFilm: mockFilmDetails()
+        selectedFilm: mockedFilmDetails
       },
       user: {
-        ...mockUserDetails(),
+        ...mockedUserDetails,
         authorizationStatus: AuthorizationStatus.Authorized,
       },
     });
@@ -35,10 +37,13 @@ describe('Component: MyListButton', () => {
         <MyListButton listLength={mockedListLength} />,
         {
           film: {
-            selectedFilm: mockFilmDetails()
+            selectedFilm: {
+              ...mockedFilmDetails,
+              isFavorite: true,
+            }
           },
           user: {
-            ...mockUserDetails(),
+            ...mockedUserDetails,
             authorizationStatus: AuthorizationStatus.Authorized,
           },
         });
@@ -60,10 +65,13 @@ describe('Component: MyListButton', () => {
   it('should redirect to login page when guest clicks on the button', async () => {
     const { component, mockStore, history } = withProviders(<MyListButton listLength={mockedListLength} />, {
       film: {
-        selectedFilm: mockFilmDetails()
+        selectedFilm: {
+          ...mockedFilmDetails,
+          isFavorite: false,
+        }
       },
       user: {
-        ...mockUserDetails(),
+        ...mockedUserDetails,
         authorizationStatus: AuthorizationStatus.Unauthorized,
       },
     });
