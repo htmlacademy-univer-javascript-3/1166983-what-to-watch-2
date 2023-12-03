@@ -25,6 +25,11 @@ export function mockFilmDetails(): FilmDetails & FilmPreview {
   });
 }
 
+export function mockFilmArray(): (FilmDetails & FilmPreview)[] {
+  const arrayLength = faker.datatype.number({max: 20});
+  return Array.from({length: arrayLength}, () => mockFilmDetails());
+}
+
 export function mockUserDetails(): UserData {
   return ({
     name: faker.name.findName(),

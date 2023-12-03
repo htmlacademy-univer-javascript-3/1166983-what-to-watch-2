@@ -1,15 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { withProviders } from '../../utils/mock-component.tsx';
 import FilmList from './index.tsx';
-import { mockFilmDetails } from '../../utils/mock-data.ts';
+import { mockFilmArray } from '../../utils/mock-data.ts';
+import { expect } from 'vitest';
 
 describe('Component: FilmList', () => {
-  const mockedFilmDetails = mockFilmDetails();
+  const mockedFilmArray = mockFilmArray();
 
   it('should display video on hover and image by default', () => {
-    const { component } = withProviders(<FilmList data={[mockedFilmDetails]} />);
+    const { component } = withProviders(<FilmList data={mockedFilmArray} />);
     render(component);
-    const article = screen.getByRole('article');
-    expect(article).toBeInTheDocument();
+    const articles = screen.getAllByRole('article');
+    expect(articles.length).toBe(mockedFilmArray.length);
   });
 });
