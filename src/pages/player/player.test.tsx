@@ -1,10 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Player from './index.tsx';
 import { withProviders } from '../../utils/mock-component.tsx';
 import { mockFilmDetails } from '../../utils/mock-data.ts';
 import userEvent from '@testing-library/user-event';
 import { AppRoutes } from '../../types/routes.ts';
 import { afterAll, beforeAll, expect, SpyInstance, vitest } from 'vitest';
+import { extractActionsTypes } from '../../utils/reducer.ts';
+import { loadFilmDetails } from '../../store/api-actions.ts';
 
 describe('Component: Player', () => {
   const mockedSelectedFilm = mockFilmDetails();
@@ -25,15 +27,20 @@ describe('Component: Player', () => {
     vitest.clearAllMocks();
   });
 
-  it('should render correctly', () => {
-    const { component } = withProviders(<Player />, {
+  it('should render correctly and load data', async () => {
+    const { component, mockAxiosAdapter, mockStore } = withProviders(<Player />, {
       film: {
         selectedFilm: mockedSelectedFilm,
       }
     });
+    mockAxiosAdapter.onGet(/\/films\/*/).reply(200, mockedSelectedFilm);
     render(component);
     expect(screen.getByTestId('video-player')).toBeInTheDocument();
     expect(screen.getByText(mockedSelectedFilm.name)).toBeInTheDocument();
+    await waitFor(() => expect(extractActionsTypes(mockStore.getActions())).toEqual([
+      loadFilmDetails.pending.type,
+      loadFilmDetails.fulfilled.type,
+    ]));
   });
 
   it('should redirect to the film page on exit button click', async () => {

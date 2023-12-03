@@ -1,21 +1,34 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { withProviders } from '../../utils/mock-component.tsx';
 import { expect } from 'vitest';
 import MyList from './index.tsx';
-import { mockFilmArray } from '../../utils/mock-data.ts';
+import { mockFilmArray, mockUserDetails } from '../../utils/mock-data.ts';
+import { AuthorizationStatus } from '../../types/user.ts';
+import { extractActionsTypes } from '../../utils/reducer.ts';
+import { loadFavoriteFilms } from '../../store/api-actions.ts';
 
 describe('Component: MyList', () => {
   const mockedFavouriteFilms = mockFilmArray();
+  const mockedUserDetails = mockUserDetails();
 
-  it('should render correctly', () => {
-    const { component } = withProviders(<MyList />, {
+  it('should render correctly', async () => {
+    const { component, mockAxiosAdapter, mockStore } = withProviders(<MyList />, {
+      user: {
+        ...mockedUserDetails,
+        authorizationStatus: AuthorizationStatus.Authorized,
+      },
       film: {
         favouriteFilms: mockedFavouriteFilms,
       }
     });
+    mockAxiosAdapter.onGet(/\/favorite\/*/).reply(200, mockedFavouriteFilms);
     render(component);
     expect(screen.getByText(/my list/i)).toBeInTheDocument();
     expect(screen.getByText(mockedFavouriteFilms.length)).toBeInTheDocument();
     expect(screen.getByText(/catalog/i)).toBeInTheDocument();
+    await waitFor(() => expect(extractActionsTypes(mockStore.getActions())).toEqual([
+      loadFavoriteFilms.pending.type,
+      loadFavoriteFilms.fulfilled.type,
+    ]));
   });
 });
