@@ -26,7 +26,7 @@ export function mockFilmDetails(): FilmDetails & FilmPreview {
 }
 
 export function mockFilmArray(): (FilmDetails & FilmPreview)[] {
-  const arrayLength = faker.datatype.number({max: 20});
+  const arrayLength = faker.datatype.number({min: 5, max: 20});
   return Array.from({length: arrayLength}, () => mockFilmDetails());
 }
 
