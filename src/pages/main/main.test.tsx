@@ -12,7 +12,7 @@ describe('Component: Main', () => {
   const mockedUserDetails = mockUserDetails();
   const mockedGenres = [...new Set(mockedFilteredFilms.map(({genre}) => genre))];
 
-  it('should display correctly', async () => {
+  it('should display correctly and load data', async () => {
     const { component, mockStore, mockAxiosAdapter } = withProviders(<Main />, {
       user: {
         ...mockedUserDetails,

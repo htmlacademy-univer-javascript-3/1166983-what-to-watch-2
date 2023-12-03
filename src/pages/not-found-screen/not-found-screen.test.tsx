@@ -8,7 +8,7 @@ import { clearRequestCount } from '../../store/api-actions.ts';
 import { extractActionsTypes } from '../../utils/reducer.ts';
 
 describe('Component: SignInForm', () => {
-  it('should render correctly', async () => {
+  it('should render correctly and display redirect link', async () => {
     const {component, history, mockStore} = withProviders(<NotFoundScreen />);
     render(component);
     expect(screen.getByText(/ошибка 404\. страница не найдена/i)).toBeInTheDocument();
