@@ -4,7 +4,7 @@ import { expect } from 'vitest';
 import MyList from './index.tsx';
 import { mockFilmArray, mockUserDetails } from '../../utils/mock-data.ts';
 import { AuthorizationStatus } from '../../types/user.ts';
-import { extractActionsTypes } from '../../utils/reducer.ts';
+import { extractActionsTypes } from '../../utils/mock-reducer.ts';
 import { loadFavoriteFilms } from '../../store/api-actions.ts';
 
 describe('Component: MyList', () => {

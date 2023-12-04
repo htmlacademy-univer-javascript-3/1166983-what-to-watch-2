@@ -5,7 +5,7 @@ import { mockFilmDetails } from '../../utils/mock-data.ts';
 import userEvent from '@testing-library/user-event';
 import { AppRoutes } from '../../types/routes.ts';
 import { afterAll, beforeAll, expect, SpyInstance, vitest } from 'vitest';
-import { extractActionsTypes } from '../../utils/reducer.ts';
+import { extractActionsTypes } from '../../utils/mock-reducer.ts';
 import { loadFilmDetails } from '../../store/api-actions.ts';
 
 describe('Component: Player', () => {

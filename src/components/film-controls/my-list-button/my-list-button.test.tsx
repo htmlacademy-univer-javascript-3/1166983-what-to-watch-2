@@ -5,7 +5,7 @@ import MyListButton from './index.tsx';
 import { mockFilmDetails, mockUserDetails } from '../../../utils/mock-data.ts';
 import { AuthorizationStatus } from '../../../types/user.ts';
 import { loadFavoriteFilms, setIsFavorite } from '../../../store/api-actions.ts';
-import { extractActionsTypes } from '../../../utils/reducer.ts';
+import { extractActionsTypes } from '../../../utils/mock-reducer.ts';
 import { AppRoutes } from '../../../types/routes.ts';
 import * as faker from 'faker';
 

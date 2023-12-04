@@ -3,7 +3,7 @@ import { expect } from 'vitest';
 import { mockFilmArray } from '../../../utils/mock-data.ts';
 import { withProviders } from '../../../utils/mock-component.tsx';
 import userEvent from '@testing-library/user-event';
-import { extractActionsTypes } from '../../../utils/reducer.ts';
+import { extractActionsTypes } from '../../../utils/mock-reducer.ts';
 import { setSelectedGenre } from '../../../store/film.ts';
 import GenreList from './index.tsx';
 

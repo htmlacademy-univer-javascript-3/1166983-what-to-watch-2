@@ -5,7 +5,7 @@ import { AppRoutes } from '../../../types/routes.ts';
 import { mockUserDetails } from '../../../utils/mock-data.ts';
 import UserBlock from './index.tsx';
 import { AuthorizationStatus } from '../../../types/user.ts';
-import { extractActionsTypes } from '../../../utils/reducer.ts';
+import { extractActionsTypes } from '../../../utils/mock-reducer.ts';
 import { signOut } from '../../../store/api-actions.ts';
 import { expect } from 'vitest';
 

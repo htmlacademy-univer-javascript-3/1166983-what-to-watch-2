@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { expect } from 'vitest';
 import { mockFilmDetails } from '../../utils/mock-data.ts';
 import { withProviders } from '../../utils/mock-component.tsx';
-import { extractActionsTypes } from '../../utils/reducer.ts';
+import { extractActionsTypes } from '../../utils/mock-reducer.ts';
 import { loadFilmDetails } from '../../store/api-actions.ts';
 import AddReview from './index.tsx';
 

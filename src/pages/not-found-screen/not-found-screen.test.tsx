@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 import { AppRoutes } from '../../types/routes.ts';
 import { clearRequestCount } from '../../store/api-actions.ts';
-import { extractActionsTypes } from '../../utils/reducer.ts';
+import { extractActionsTypes } from '../../utils/mock-reducer.ts';
 
 describe('Component: SignInForm', () => {
   it('should render correctly and display redirect link', async () => {
