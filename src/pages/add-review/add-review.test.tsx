@@ -15,7 +15,7 @@ describe('Component: AddReview', () => {
         selectedFilm: mockedSelectedFilm
       }
     });
-    mockAxiosAdapter.onGet(/\/films\/*/).reply(200, mockedSelectedFilm);
+    mockAxiosAdapter.onGet(/\/films/).reply(200, mockedSelectedFilm);
     render(component);
     expect(screen.getByAltText(mockedSelectedFilm.name)).toBeInTheDocument();
     expect(screen.getByAltText(mockedSelectedFilm.name)).toBeInTheDocument();

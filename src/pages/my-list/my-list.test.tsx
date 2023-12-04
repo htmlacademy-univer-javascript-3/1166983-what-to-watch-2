@@ -21,7 +21,7 @@ describe('Component: MyList', () => {
         favouriteFilms: mockedFavouriteFilms,
       }
     });
-    mockAxiosAdapter.onGet(/\/favorite\/*/).reply(200, mockedFavouriteFilms);
+    mockAxiosAdapter.onGet(/\/favorite/).reply(200, mockedFavouriteFilms);
     render(component);
     expect(screen.getByText(/my list/i)).toBeInTheDocument();
     expect(screen.getByText(mockedFavouriteFilms.length)).toBeInTheDocument();

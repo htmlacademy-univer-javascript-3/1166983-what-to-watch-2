@@ -1,6 +1,6 @@
 import { FilmDetails, FilmPreview } from '../types/film.ts';
 import * as faker from 'faker';
-import { UserData } from '../types/user.ts';
+import { UserCredentials, UserData } from '../types/user.ts';
 import { VideoPlayerProps } from '../components/video-player/video-player.tsx';
 import { Review } from '../types/review.ts';
 
@@ -37,6 +37,13 @@ export function mockUserDetails(): UserData {
     avatarUrl: faker.image.imageUrl(),
     email: faker.internet.email(),
     token: faker.datatype.string(),
+  });
+}
+
+export function mockUserCredentials(): UserCredentials {
+  return ({
+    email: faker.internet.email(),
+    password: faker.internet.password(),
   });
 }
 

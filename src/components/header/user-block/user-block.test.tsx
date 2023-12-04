@@ -35,7 +35,7 @@ describe('Component: UserBlock', () => {
           authorizationStatus: AuthorizationStatus.Authorized,
         }
       });
-    mockAxiosAdapter.onDelete(/\/logout\/*/).reply(200);
+    mockAxiosAdapter.onDelete(/\/logout/).reply(200);
     render(component);
 
     const signOutElement = screen.getByText(/sign out/i);

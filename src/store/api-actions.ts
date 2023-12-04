@@ -56,9 +56,12 @@ export const signIn = createAsyncThunk<UserData, UserCredentials, AsyncActionCon
   }
 );
 
-export const signOut = createAsyncThunk<UserData, undefined, AsyncActionConfig>(
+export const signOut = createAsyncThunk<void, undefined, AsyncActionConfig>(
   'user/signOut',
-  async (_arg, { extra: api }) => await api.delete('/logout')
+  async (_arg, { extra: api }) => {
+    await api.delete('/logout');
+    dropToken();
+  }
 );
 
 export const loadFavoriteFilms = createAsyncThunk<FilmPreview[], undefined, AsyncActionConfig>(
@@ -72,7 +75,7 @@ export const clearRequestCount = createAsyncThunk<void, undefined, AsyncActionCo
   () => undefined,
 );
 
-export const addReview = createAsyncThunk<undefined, ReviewFormValues & { filmId: string }, AsyncActionConfig>(
+export const addReview = createAsyncThunk<void, ReviewFormValues & { filmId: string }, AsyncActionConfig>(
   'reviews/addReview',
   async ({ filmId, ...requestData }: ReviewFormValues & { filmId: string }, { extra: api }) =>
     await api.post(`/comments/${filmId}`, requestData)

@@ -33,7 +33,7 @@ describe('Component: Player', () => {
         selectedFilm: mockedSelectedFilm,
       }
     });
-    mockAxiosAdapter.onGet(/\/films\/*/).reply(200, mockedSelectedFilm);
+    mockAxiosAdapter.onGet(/\/films/).reply(200, mockedSelectedFilm);
     render(component);
     expect(screen.getByTestId('video-player')).toBeInTheDocument();
     expect(screen.getByText(mockedSelectedFilm.name)).toBeInTheDocument();

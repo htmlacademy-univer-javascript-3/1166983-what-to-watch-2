@@ -32,9 +32,9 @@ describe('Component: Film', () => {
         reviews: mockedReviews,
       }
     });
-    mockAxiosAdapter.onGet(/\/favorite\/*/).reply(200, mockedFilteredFilms);
-    mockAxiosAdapter.onGet(/\/comments\/*/).reply(200, mockedReviews);
-    mockAxiosAdapter.onGet(/\/films\/*/).reply(200);
+    mockAxiosAdapter.onGet(/\/favorite/).reply(200, mockedFilteredFilms);
+    mockAxiosAdapter.onGet(/\/comments/).reply(200, mockedReviews);
+    mockAxiosAdapter.onGet(/\/films/).reply(200);
     render(component);
     expect(screen.getByAltText(mockedFilteredFilms[0].name)).toBeInTheDocument();
     expect(screen.getByText(mockedFilteredFilms[0].name)).toBeInTheDocument();

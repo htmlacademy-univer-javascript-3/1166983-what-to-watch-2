@@ -47,8 +47,8 @@ describe('Component: MyListButton', () => {
             authorizationStatus: AuthorizationStatus.Authorized,
           },
         });
-    mockAxiosAdapter.onPost(/\/favorite\/*/).reply(200);
-    mockAxiosAdapter.onGet(/\/favorite\/*/).reply(200);
+    mockAxiosAdapter.onPost(/\/favorite/).reply(200);
+    mockAxiosAdapter.onGet(/\/favorite/).reply(200);
 
     render(component);
     await userEvent.click(screen.getByRole('button'));
