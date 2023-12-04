@@ -6,7 +6,7 @@ export default function ReviewBlock({ rating, user, comment, date }: Review) {
   const commentDate = new Date(date);
 
   return (
-    <div className="review">
+    <div className="review" data-testid="review-block">
       <blockquote className="review__quote">
         <p className="review__text">{comment}</p>
         <footer className="review__details">
