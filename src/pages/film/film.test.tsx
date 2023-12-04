@@ -1,42 +1,52 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { expect } from 'vitest';
-import { mockFilmArray, mockUserDetails } from '../../utils/mock-data.ts';
+import { mockFilmArray, mockReviewArray, mockUserDetails } from '../../utils/mock-data.ts';
 import { withProviders } from '../../utils/mock-component.tsx';
 import { extractActionsTypes } from '../../utils/reducer.ts';
-import { loadFavoriteFilms, loadPromoFilm } from '../../store/api-actions.ts';
+import {
+  loadFavoriteFilms,
+  loadFilmDetails,
+  loadReviews,
+  loadSuggestions
+} from '../../store/api-actions.ts';
 import { AuthorizationStatus } from '../../types/user.ts';
-import Main from './main.tsx';
+import Film from './index.tsx';
 
-describe('Component: Main', () => {
+describe('Component: Film', () => {
   const mockedFilteredFilms = mockFilmArray();
+  const mockedReviews = mockReviewArray();
   const mockedUserDetails = mockUserDetails();
-  const mockedGenres = [...new Set(mockedFilteredFilms.map(({genre}) => genre))];
 
   it('should render correctly and load data', async () => {
-    const { component, mockStore, mockAxiosAdapter } = withProviders(<Main />, {
+    const { component, mockStore, mockAxiosAdapter } = withProviders(<Film />, {
       user: {
         ...mockedUserDetails,
         authorizationStatus: AuthorizationStatus.Authorized,
       },
       film: {
-        filmListPortion: mockedFilteredFilms.slice(1),
+        suggestionPortion: mockedFilteredFilms.slice(1),
         selectedFilm: mockedFilteredFilms[0],
-        filteredFilms: mockedFilteredFilms,
-        filmListLength: mockedFilteredFilms.length - 1,
-        genres: mockedGenres,
-        selectedGenre: mockedGenres[0],
         favouriteFilms: mockedFilteredFilms,
+      },
+      reviews: {
+        reviews: mockedReviews,
       }
     });
     mockAxiosAdapter.onGet(/\/favorite\/*/).reply(200, mockedFilteredFilms);
-    mockAxiosAdapter.onGet(/\/promo\/*/).reply(200, mockedFilteredFilms[0]);
+    mockAxiosAdapter.onGet(/\/comments\/*/).reply(200, mockedReviews);
+    mockAxiosAdapter.onGet(/\/films\/*/).reply(200);
     render(component);
     expect(screen.getByAltText(mockedFilteredFilms[0].name)).toBeInTheDocument();
     expect(screen.getByText(mockedFilteredFilms[0].name)).toBeInTheDocument();
-    expect(screen.getByText(/catalog/i)).toBeInTheDocument();
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
+    expect(screen.getByText(/more like this/i)).toBeInTheDocument();
     await waitFor(() => expect(extractActionsTypes(mockStore.getActions())).toEqual([
-      loadPromoFilm.pending.type,
-      loadPromoFilm.fulfilled.type,
+      loadReviews.pending.type,
+      loadReviews.fulfilled.type,
+      loadSuggestions.pending.type,
+      loadSuggestions.fulfilled.type,
+      loadFilmDetails.pending.type,
+      loadFilmDetails.fulfilled.type,
       loadFavoriteFilms.pending.type,
       loadFavoriteFilms.fulfilled.type,
     ]));

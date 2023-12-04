@@ -11,7 +11,7 @@ describe('Component: GenreList', () => {
   const mockedFilteredFilms = mockFilmArray();
   const mockedGenres = [...new Set(mockedFilteredFilms.map(({genre}) => genre))];
 
-  it('should display correctly and change genres', async () => {
+  it('should render correctly and change genres', async () => {
     const { component, mockStore } = withProviders(<GenreList />, {
       film: {
         genres: mockedGenres,

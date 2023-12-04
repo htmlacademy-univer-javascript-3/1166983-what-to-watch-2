@@ -2,6 +2,7 @@ import { FilmDetails, FilmPreview } from '../types/film.ts';
 import * as faker from 'faker';
 import { UserData } from '../types/user.ts';
 import { VideoPlayerProps } from '../components/video-player/video-player.tsx';
+import { Review } from '../types/review.ts';
 
 export function mockFilmDetails(): FilmDetails & FilmPreview {
   return ({
@@ -12,11 +13,11 @@ export function mockFilmDetails(): FilmDetails & FilmPreview {
     backgroundImage: faker.image.imageUrl(),
     backgroundColor: faker.internet.color(),
     videoLink: faker.internet.url(),
-    description: faker.image.imageUrl(),
-    rating: faker.datatype.number(),
+    description: faker.commerce.productDescription(),
+    rating: faker.datatype.number({ max: 10 }),
     scoresCount: faker.datatype.number(),
     director: faker.name.findName(),
-    starring: Array.from({length: 10}, () => faker.name.findName()),
+    starring: Array.from({ length: 10 }, () => faker.name.findName()),
     runTime: faker.datatype.number(),
     released: faker.datatype.number(),
     isFavorite: faker.datatype.boolean(),
@@ -26,8 +27,8 @@ export function mockFilmDetails(): FilmDetails & FilmPreview {
 }
 
 export function mockFilmArray(): (FilmDetails & FilmPreview)[] {
-  const arrayLength = faker.datatype.number({min: 5, max: 20});
-  return Array.from({length: arrayLength}, () => mockFilmDetails());
+  const arrayLength = faker.datatype.number({ min: 5, max: 20 });
+  return Array.from({ length: arrayLength }, () => mockFilmDetails());
 }
 
 export function mockUserDetails(): UserData {
@@ -44,5 +45,20 @@ export function mockPlayerDetails(): VideoPlayerProps {
     posterImage: faker.image.imageUrl(),
     videoLink: faker.internet.url(),
   });
+}
+
+export function mockReview(): Review {
+  return ({
+    id: faker.datatype.uuid(),
+    date: faker.datatype.datetime().toDateString(),
+    user: faker.name.findName(),
+    comment: faker.commerce.productDescription(),
+    rating: faker.datatype.number({ max: 10 }),
+  });
+}
+
+export function mockReviewArray(): Review[] {
+  const arrayLength = faker.datatype.number({ min: 5, max: 20 });
+  return Array.from({ length: arrayLength }, () => mockReview());
 }
 

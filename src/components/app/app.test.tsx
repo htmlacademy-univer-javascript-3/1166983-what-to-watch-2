@@ -56,7 +56,7 @@ describe('Application Routing', () => {
     expect(screen.getByText(/more like this/i)).toBeInTheDocument();
   });
 
-  it('should render add review page when user navigate to "/review"', () => {
+  it('should render add review-block page when user navigate to "/review-block"', () => {
     const { component, history } = withProviders(<App />,
       {
         film: {

@@ -9,7 +9,7 @@ import AddReview from './index.tsx';
 describe('Component: AddReview', () => {
   const mockedSelectedFilm = mockFilmDetails();
 
-  it('should display correctly and load data', async () => {
+  it('should render correctly and load data', async () => {
     const { component, mockStore, mockAxiosAdapter } = withProviders(<AddReview />, {
       film: {
         selectedFilm: mockedSelectedFilm

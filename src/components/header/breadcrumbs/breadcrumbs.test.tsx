@@ -19,7 +19,7 @@ describe('Component: Breadcrumbs', () => {
     expect(history.location.pathname).toBe(AppRoutes.Film.replace(':id', id));
   });
 
-  it('should redirect to add review page on link click', async () => {
+  it('should redirect to add review-block page on link click', async () => {
     const { component, history } = withProviders(
       <Breadcrumbs id={id} name={name} />
     );
