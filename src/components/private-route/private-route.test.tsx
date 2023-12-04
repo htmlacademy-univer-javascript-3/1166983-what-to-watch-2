@@ -25,7 +25,12 @@ describe('Component: PrivateRoute', () => {
     const { component, history } = withProviders(
       <PrivateRoute>
         <span>Example Child</span>
-      </PrivateRoute>
+      </PrivateRoute>,
+      {
+        user: {
+          authorizationStatus: AuthorizationStatus.Unauthorized,
+        }
+      }
     );
     render(component);
     expect(history.location.pathname).toBe(AppRoutes.SignIn);

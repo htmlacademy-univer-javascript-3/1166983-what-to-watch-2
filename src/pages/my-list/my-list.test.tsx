@@ -8,7 +8,7 @@ import { extractActionsTypes } from '../../utils/mock-reducer.ts';
 import { loadFavoriteFilms } from '../../store/api-actions.ts';
 
 describe('Component: MyList', () => {
-  const mockedFavouriteFilms = mockFilmArray();
+  const mockedfavoriteFilms = mockFilmArray();
   const mockedUserDetails = mockUserDetails();
 
   it('should render correctly', async () => {
@@ -18,13 +18,13 @@ describe('Component: MyList', () => {
         authorizationStatus: AuthorizationStatus.Authorized,
       },
       film: {
-        favouriteFilms: mockedFavouriteFilms,
+        favoriteFilms: mockedfavoriteFilms,
       }
     });
-    mockAxiosAdapter.onGet(/\/favorite/).reply(200, mockedFavouriteFilms);
+    mockAxiosAdapter.onGet(/\/favorite/).reply(200, mockedfavoriteFilms);
     render(component);
     expect(screen.getByText(/my list/i)).toBeInTheDocument();
-    expect(screen.getByText(mockedFavouriteFilms.length)).toBeInTheDocument();
+    expect(screen.getByText(mockedfavoriteFilms.length)).toBeInTheDocument();
     expect(screen.getByText(/catalog/i)).toBeInTheDocument();
     await waitFor(() => expect(extractActionsTypes(mockStore.getActions())).toEqual([
       loadFavoriteFilms.pending.type,

@@ -31,7 +31,7 @@ describe('Component: MyListButton', () => {
     expect(screen.getByText(mockedListLength)).toBeInTheDocument();
   });
 
-  it('should change favourite film list when authorized user clicks on the button', async () => {
+  it('should change favorite film list when authorized user clicks on the button', async () => {
     const { component, mockStore, mockAxiosAdapter } =
       withProviders(
         <MyListButton listLength={mockedListLength} />,

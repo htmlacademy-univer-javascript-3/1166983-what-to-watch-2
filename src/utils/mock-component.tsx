@@ -10,7 +10,7 @@ import { ReactElement } from 'react';
 import { BrowserHistory, createMemoryHistory } from 'history';
 import HistoryRouter from '../components/history-router';
 import {initialState as filmSliceState} from '../store/film.ts';
-import {initialState as reviewsSliceState} from '../store/reviews.ts';
+import {initialState as reviewsSliceState} from '../store/review.ts';
 import {initialState as appSliceState} from '../store/app.ts';
 import {initialState as userSliceState} from '../store/user.ts';
 
@@ -35,7 +35,7 @@ export function withProviders(
   const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
   const mockStore = mockStoreCreator({
     film: filmSliceState,
-    reviews: reviewsSliceState,
+    review: reviewsSliceState,
     user: userSliceState,
     app: appSliceState,
     ...initialState

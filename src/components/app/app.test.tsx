@@ -1,13 +1,32 @@
-import { render, screen} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import App from './app';
 import { withProviders } from '../../utils/mock-component';
 import { AppRoutes } from '../../types/routes.ts';
 import { AuthorizationStatus } from '../../types/user.ts';
-import { mockFilmDetails } from '../../utils/mock-data.ts';
+import { mockFilmDetails, mockUserDetails } from '../../utils/mock-data.ts';
 import { initialState as filmSliceState } from '../../store/film.ts';
+import { extractActionsTypes } from '../../utils/mock-reducer.ts';
+import { loadFilms, verifyToken } from '../../store/api-actions.ts';
 
 describe('Application Routing', () => {
-  const filmDetails = mockFilmDetails();
+  const mockedFilmDetails = mockFilmDetails();
+  const mockedUserDetails = mockUserDetails();
+
+  it('should render correctly and load data', async () => {
+    const { component, history, mockStore, mockAxiosAdapter } = withProviders(<App />);
+    history.push(AppRoutes.SignIn);
+    mockAxiosAdapter.onGet(/\/login/).reply(200, mockedUserDetails);
+    mockAxiosAdapter.onGet(/\/films/).reply(200, mockedFilmDetails);
+
+    render(component);
+
+    await waitFor(() => expect(extractActionsTypes(mockStore.getActions())).toEqual([
+      verifyToken.pending.type,
+      verifyToken.fulfilled.type,
+      loadFilms.pending.type,
+      loadFilms.fulfilled.type,
+    ]));
+  });
 
   it('should render main page when user navigate to "/"', () => {
     const { component, history } = withProviders(<App />);
@@ -46,10 +65,10 @@ describe('Application Routing', () => {
       {
         film: {
           ...filmSliceState,
-          selectedFilm: filmDetails,
+          selectedFilm: mockedFilmDetails,
         },
       });
-    history.push(AppRoutes.Film.replace(':id', filmDetails.id));
+    history.push(AppRoutes.Film.replace(':id', mockedFilmDetails.id));
 
     render(component);
 
@@ -60,13 +79,13 @@ describe('Application Routing', () => {
     const { component, history } = withProviders(<App />,
       {
         film: {
-          selectedFilm: filmDetails,
+          selectedFilm: mockedFilmDetails,
         },
         user: {
           authorizationStatus: AuthorizationStatus.Authorized,
         }
       });
-    history.push(AppRoutes.AddReview.replace(':id', filmDetails.id));
+    history.push(AppRoutes.AddReview.replace(':id', mockedFilmDetails.id));
 
     render(component);
 
@@ -77,10 +96,10 @@ describe('Application Routing', () => {
     const { component, history } = withProviders(<App />,
       {
         film: {
-          selectedFilm: filmDetails,
+          selectedFilm: mockedFilmDetails,
         },
       });
-    history.push(AppRoutes.Player.replace(':id', filmDetails.id));
+    history.push(AppRoutes.Player.replace(':id', mockedFilmDetails.id));
 
     render(component);
 

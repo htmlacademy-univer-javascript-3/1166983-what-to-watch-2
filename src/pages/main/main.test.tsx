@@ -25,7 +25,7 @@ describe('Component: Main', () => {
         filmListLength: mockedFilteredFilms.length - 1,
         genres: mockedGenres,
         selectedGenre: mockedGenres[0],
-        favouriteFilms: mockedFilteredFilms,
+        favoriteFilms: mockedFilteredFilms,
       }
     });
     mockAxiosAdapter.onGet(/\/favorite/).reply(200, mockedFilteredFilms);

@@ -26,9 +26,9 @@ describe('Component: Film', () => {
       film: {
         suggestionPortion: mockedFilteredFilms.slice(1),
         selectedFilm: mockedFilteredFilms[0],
-        favouriteFilms: mockedFilteredFilms,
+        favoriteFilms: mockedFilteredFilms,
       },
-      reviews: {
+      review: {
         reviews: mockedReviews,
       }
     });

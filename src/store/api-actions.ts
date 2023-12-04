@@ -30,7 +30,7 @@ export const loadSuggestions = createAsyncThunk<FilmPreview[], string, AsyncActi
 );
 
 export const loadReviews = createAsyncThunk<Review[], string, AsyncActionConfig>(
-  'reviews/loadReviews',
+  'review/loadReviews',
   async (filmId: string, { extra: api }) =>
     (await api.get<Review[]>(`/comments/${filmId}`)).data,
 );
@@ -76,7 +76,7 @@ export const clearRequestCount = createAsyncThunk<void, undefined, AsyncActionCo
 );
 
 export const addReview = createAsyncThunk<void, ReviewFormValues & { filmId: string }, AsyncActionConfig>(
-  'reviews/addReview',
+  'review/addReview',
   async ({ filmId, ...requestData }: ReviewFormValues & { filmId: string }, { extra: api }) =>
     await api.post(`/comments/${filmId}`, requestData)
 );

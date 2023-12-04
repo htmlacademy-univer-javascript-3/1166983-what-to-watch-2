@@ -69,3 +69,6 @@ export function mockReviewArray(): Review[] {
   return Array.from({ length: arrayLength }, () => mockReview());
 }
 
+export function mockToken(): string {
+  return faker.datatype.string();
+}

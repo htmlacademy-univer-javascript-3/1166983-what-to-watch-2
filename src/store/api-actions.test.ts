@@ -6,7 +6,7 @@ import { Action } from 'redux';
 import { State } from '../types/state';
 import { AppThunkDispatch } from '../utils/mock-component.tsx';
 import { initialState as filmSliceState } from './film.ts';
-import { initialState as reviewsSliceState } from './reviews.ts';
+import { initialState as reviewSliceState } from './review.ts';
 import { initialState as userSliceState } from './user.ts';
 import { initialState as appSliceState } from './app.ts';
 import {
@@ -22,8 +22,7 @@ import {
   verifyToken
 } from './api-actions.ts';
 import { extractActionsTypes } from '../utils/mock-reducer.ts';
-import { mockFilmArray, mockReviewArray, mockUserCredentials, mockUserDetails } from '../utils/mock-data.ts';
-import * as faker from 'faker';
+import { mockFilmArray, mockReviewArray, mockToken, mockUserCredentials, mockUserDetails } from '../utils/mock-data.ts';
 import * as tokenStorage from '../services/storage.ts';
 
 describe('Async actions', () => {
@@ -35,13 +34,13 @@ describe('Async actions', () => {
   const mockedUserDetails = mockUserDetails();
   const mockedFilmArray = mockFilmArray();
   const mockedReviewArray = mockReviewArray();
-  const mockedToken = faker.datatype.string();
+  const mockedToken = mockToken();
   let store: ReturnType<typeof mockStoreCreator>;
 
   beforeEach(() => {
     store = mockStoreCreator({
       film: filmSliceState,
-      reviews: reviewsSliceState,
+      review: reviewSliceState,
       user: userSliceState,
       app: appSliceState,
     });

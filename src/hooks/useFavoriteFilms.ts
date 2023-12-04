@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { loadFavoriteFilms } from '../store/api-actions.ts';
 import { AuthorizationStatus } from '../types/user.ts';
 
-export function useFavouriteFilms() {
-  const { favouriteFilms } = useAppSelector((state) => state.film);
+export function useFavoriteFilms() {
+  const { favoriteFilms } = useAppSelector((state) => state.film);
   const { authorizationStatus } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
@@ -14,5 +14,5 @@ export function useFavouriteFilms() {
     }
   }, [dispatch, authorizationStatus]);
 
-  return { favouriteFilms };
+  return { favoriteFilms };
 }

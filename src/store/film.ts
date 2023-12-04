@@ -13,7 +13,7 @@ import {
 
 interface FilmSliceState {
   suggestions: FilmPreview[];
-  favouriteFilms: FilmPreview[];
+  favoriteFilms: FilmPreview[];
   suggestionPortion: FilmPreview[];
   selectedFilm?: FilmDetails;
   films: FilmPreview[];
@@ -25,7 +25,7 @@ interface FilmSliceState {
 }
 
 export const initialState: FilmSliceState = {
-  favouriteFilms: [],
+  favoriteFilms: [],
   suggestions: [],
   suggestionPortion: [],
   films: [],
@@ -97,12 +97,12 @@ const filmSlice = createSlice({
     builder.addCase(loadFavoriteFilms.fulfilled, (state, action: PayloadAction<FilmPreview[]>) => (
       {
         ...state,
-        favouriteFilms: action.payload,
+        favoriteFilms: action.payload,
       }
     ));
     builder.addCase(signOut.fulfilled, (state) => ({
       ...state,
-      favouriteFilms: [],
+      favoriteFilms: [],
       selectedFilm: state.selectedFilm ? { ...state.selectedFilm, isFavorite: false } : undefined,
     }));
   },
