@@ -38,7 +38,7 @@ export function withProviders(
     reviews: reviewsSliceState,
     user: userSliceState,
     app: appSliceState,
-    ...(initialState ?? {})
+    ...initialState
   });
 
   return ({
