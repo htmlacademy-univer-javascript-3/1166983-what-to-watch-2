@@ -28,7 +28,7 @@ interface HookWrapperWithMockStore extends Omit<ComponentWithMockStore, 'compone
 
 export type AppThunkDispatch = ThunkDispatch<State, ReturnType<typeof initAPI>, Action>;
 
-function getMockStore (initialState: DeepPartial<State> = {}, axios: AxiosInstance) {
+export function getMockStore (initialState: DeepPartial<State> = {}, axios: AxiosInstance) {
   const middleware = [thunk.withExtraArgument(axios)];
   const mockStoreCreator = configureMockStore<State, Action<string>, AppThunkDispatch>(middleware);
   return mockStoreCreator({

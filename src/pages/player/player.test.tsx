@@ -4,7 +4,7 @@ import { withProviders } from '../../utils/mock-component.tsx';
 import { mockFilmDetails } from '../../utils/mock-data.ts';
 import userEvent from '@testing-library/user-event';
 import { AppRoutes } from '../../types/routes.ts';
-import { afterAll, beforeAll, expect, SpyInstance, vitest } from 'vitest';
+import { afterAll, beforeAll, expect, SpyInstance } from 'vitest';
 import { extractActionsTypes } from '../../utils/mock-reducer.ts';
 import { loadFilmDetails } from '../../store/api-actions.ts';
 import { StatusCodes } from 'http-status-codes';
@@ -15,17 +15,17 @@ describe('Component: Player', () => {
   let playStub: SpyInstance<[], Promise<void>>;
 
   beforeAll(() => {
-    pauseStub = vitest
+    pauseStub = vi
       .spyOn(window.HTMLMediaElement.prototype, 'pause')
       .mockImplementation(() => undefined);
 
-    playStub = vitest
+    playStub = vi
       .spyOn(window.HTMLMediaElement.prototype, 'play')
       .mockImplementation(async () => new Promise(() => undefined));
   });
 
   afterAll(() => {
-    vitest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   it('should render correctly and load data', async () => {
