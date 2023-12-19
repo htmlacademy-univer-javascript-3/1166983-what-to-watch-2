@@ -2,8 +2,7 @@ import { FilmDetails, FilmPreview } from '../types/film.ts';
 import * as faker from 'faker';
 import { UserCredentials, UserData } from '../types/user.ts';
 import { VideoPlayerProps } from '../components/video-player/video-player.tsx';
-import { Review } from '../types/review.ts';
-import { RATING_OPTIONS_COUNT } from '../constants/review.ts';
+import { Review, ReviewFormLimitations } from '../types/review.ts';
 
 function getRandomArrayLength(): number {
   return faker.datatype.number({ min: 5, max: 20 });
@@ -19,7 +18,7 @@ export function mockFilmDetails(): FilmDetails & FilmPreview {
     backgroundColor: faker.internet.color(),
     videoLink: faker.internet.url(),
     description: faker.commerce.productDescription(),
-    rating: faker.datatype.number({ max: RATING_OPTIONS_COUNT }),
+    rating: faker.datatype.number({ max: ReviewFormLimitations.MaxRating }),
     scoresCount: faker.datatype.number(),
     director: faker.name.findName(),
     starring: Array.from({ length: getRandomArrayLength() }, () => faker.name.findName()),
@@ -64,7 +63,7 @@ export function mockReview(): Review {
     date: faker.datatype.datetime().toDateString(),
     user: faker.name.findName(),
     comment: faker.commerce.productDescription(),
-    rating: faker.datatype.number({ max: RATING_OPTIONS_COUNT }),
+    rating: faker.datatype.number({ max: ReviewFormLimitations.MaxRating }),
   });
 }
 
