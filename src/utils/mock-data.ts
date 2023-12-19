@@ -62,7 +62,9 @@ export function mockReview(): Review {
     id: faker.datatype.uuid(),
     date: faker.datatype.datetime().toDateString(),
     user: faker.name.findName(),
-    comment: faker.commerce.productDescription(),
+    comment: faker.commerce.productDescription()
+      .repeat(ReviewFormLimitations.CommentMinLength)
+      .slice(0, ReviewFormLimitations.CommentMinLength),
     rating: faker.datatype.number({ max: ReviewFormLimitations.MaxRating }),
   });
 }

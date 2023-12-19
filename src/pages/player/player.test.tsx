@@ -10,7 +10,7 @@ import { loadFilmDetails } from '../../store/api-actions.ts';
 import { StatusCodes } from 'http-status-codes';
 
 describe('Component: Player', () => {
-  const mockedSelectedFilm = mockFilmDetails();
+  const mockSelectedFilm = mockFilmDetails();
   let pauseStub: SpyInstance<[], void>;
   let playStub: SpyInstance<[], Promise<void>>;
 
@@ -31,13 +31,13 @@ describe('Component: Player', () => {
   it('should render correctly and load data', async () => {
     const { component, mockAxiosAdapter, mockStore } = withProviders(<Player />, {
       film: {
-        selectedFilm: mockedSelectedFilm,
+        selectedFilm: mockSelectedFilm,
       }
     });
-    mockAxiosAdapter.onGet(/\/films/).reply(StatusCodes.OK, mockedSelectedFilm);
+    mockAxiosAdapter.onGet(/\/films/).reply(StatusCodes.OK, mockSelectedFilm);
     render(component);
     expect(screen.getByTestId('video-player')).toBeInTheDocument();
-    expect(screen.getByText(mockedSelectedFilm.name)).toBeInTheDocument();
+    expect(screen.getByText(mockSelectedFilm.name)).toBeInTheDocument();
     await waitFor(() => expect(extractActionsTypes(mockStore.getActions())).toEqual([
       loadFilmDetails.pending.type,
       loadFilmDetails.fulfilled.type,
@@ -47,19 +47,19 @@ describe('Component: Player', () => {
   it('should redirect to the film page on exit button click', async () => {
     const { component, mockHistory, mockAxiosAdapter } = withProviders(<Player />, {
       film: {
-        selectedFilm: mockedSelectedFilm,
+        selectedFilm: mockSelectedFilm,
       }
     });
-    mockAxiosAdapter.onGet(/\/film/).reply(StatusCodes.OK, mockedSelectedFilm);
+    mockAxiosAdapter.onGet(/\/film/).reply(StatusCodes.OK, mockSelectedFilm);
     render(component);
     await userEvent.click(screen.getByRole('button', { name: /exit/i }));
-    expect(mockHistory.location.pathname).toBe(AppRoutes.Film.replace(':id', mockedSelectedFilm.id));
+    expect(mockHistory.location.pathname).toBe(AppRoutes.Film.replace(':id', mockSelectedFilm.id));
   });
 
   it('should display play and pause buttons', async () => {
     const { component } = withProviders(<Player />, {
       film: {
-        selectedFilm: mockedSelectedFilm,
+        selectedFilm: mockSelectedFilm,
       }
     });
     render(component);
@@ -76,7 +76,7 @@ describe('Component: Player', () => {
   it('should display fullscreen button', async () => {
     const { component } = withProviders(<Player />, {
       film: {
-        selectedFilm: mockedSelectedFilm,
+        selectedFilm: mockSelectedFilm,
       }
     });
     render(component);

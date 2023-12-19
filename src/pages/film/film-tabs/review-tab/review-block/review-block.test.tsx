@@ -6,14 +6,14 @@ import { formatDate } from '../../../../../utils/format.ts';
 import { DateFormats } from '../../../../../types/date.ts';
 
 describe('Component: ReviewBlock', () => {
-  const mockedReview = mockReview();
+  const mockReviewDetails = mockReview();
 
   it('should render correctly', () => {
-    render(<ReviewBlock {...mockedReview} />);
+    render(<ReviewBlock {...mockReviewDetails} />);
     expect(screen.getByTestId('review-block')).toBeInTheDocument();
-    expect(screen.getByText(mockedReview.comment)).toBeInTheDocument();
-    expect(screen.getByText(mockedReview.rating)).toBeInTheDocument();
-    expect(screen.getByText(mockedReview.user)).toBeInTheDocument();
-    expect(screen.getByText(formatDate(mockedReview.date, DateFormats.Standard))).toBeInTheDocument();
+    expect(screen.getByText(mockReviewDetails.comment)).toBeInTheDocument();
+    expect(screen.getByText(mockReviewDetails.rating)).toBeInTheDocument();
+    expect(screen.getByText(mockReviewDetails.user)).toBeInTheDocument();
+    expect(screen.getByText(formatDate(mockReviewDetails.date, DateFormats.Standard))).toBeInTheDocument();
   });
 });
