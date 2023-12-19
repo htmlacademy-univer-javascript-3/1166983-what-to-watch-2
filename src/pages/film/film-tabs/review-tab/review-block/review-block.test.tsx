@@ -3,7 +3,7 @@ import { expect } from 'vitest';
 import ReviewBlock from './index.tsx';
 import { mockReview } from '../../../../../utils/mock-data.ts';
 import { formatDate } from '../../../../../utils/format.ts';
-import { STANDARD_DATE_FORMAT } from '../../../../../constants/date.ts';
+import { DateFormats } from '../../../../../types/date.ts';
 
 describe('Component: ReviewBlock', () => {
   const mockedReview = mockReview();
@@ -14,6 +14,6 @@ describe('Component: ReviewBlock', () => {
     expect(screen.getByText(mockedReview.comment)).toBeInTheDocument();
     expect(screen.getByText(mockedReview.rating)).toBeInTheDocument();
     expect(screen.getByText(mockedReview.user)).toBeInTheDocument();
-    expect(screen.getByText(formatDate(new Date(mockedReview.date), STANDARD_DATE_FORMAT))).toBeInTheDocument();
+    expect(screen.getByText(formatDate(mockedReview.date, DateFormats.Standard))).toBeInTheDocument();
   });
 });

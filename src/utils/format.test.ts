@@ -1,5 +1,5 @@
 import { formatDate, formatPlayerTime, formatRunTime } from './format.ts';
-import { SHORT_DATE_FORMAT, STANDARD_DATE_FORMAT } from '../constants/date.ts';
+import { DateFormats } from '../types/date.ts';
 
 describe('Utils: Formats', () => {
   it('should format player time', () => {
@@ -8,9 +8,9 @@ describe('Utils: Formats', () => {
   });
 
   it('should format dates', () => {
-    const mockDate = new Date('Sat Nov 16 1996');
-    expect(formatDate(new Date(mockDate), STANDARD_DATE_FORMAT)).toEqual('Nov 16, 1996');
-    expect(formatDate(new Date(mockDate), SHORT_DATE_FORMAT)).toEqual('11/16/1996');
+    const mockDate = 'Sat Nov 16 1996';
+    expect(formatDate(mockDate, DateFormats.Standard)).toEqual('November 16, 1996');
+    expect(formatDate(mockDate, DateFormats.Short)).toEqual('1996-11-16');
   });
 
   it('should format run time', () => {
