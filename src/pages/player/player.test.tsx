@@ -1,10 +1,10 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Player from './index.tsx';
 import { withProviders } from '../../utils/mock-component.tsx';
 import { mockFilmDetails } from '../../utils/mock-data.ts';
 import userEvent from '@testing-library/user-event';
 import { AppRoutes } from '../../types/routes.ts';
-import { afterAll, beforeAll, expect, SpyInstance } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, expect, SpyInstance } from 'vitest';
 import { extractActionsTypes } from '../../utils/mock-reducer.ts';
 import { loadFilmDetails } from '../../store/api-actions.ts';
 import { StatusCodes } from 'http-status-codes';
@@ -22,6 +22,20 @@ describe('Component: Player', () => {
     playStub = vi
       .spyOn(window.HTMLMediaElement.prototype, 'play')
       .mockImplementation(async () => new Promise(() => undefined));
+  });
+
+  beforeEach(() => {
+    Object.defineProperty(document, 'fullscreenElement', {
+      writable: true,
+      value: vi.fn(),
+    });
+  });
+
+  afterEach(() => {
+    Object.defineProperty(document, 'fullscreenElement', {
+      writable: true,
+      value: undefined,
+    });
   });
 
   afterAll(() => {
@@ -66,6 +80,7 @@ describe('Component: Player', () => {
     expect(screen.queryByRole('button', { name: /pause/i })).not.toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /play/i }));
     expect(playStub).toHaveBeenCalled();
+    fireEvent.timeUpdate(screen.getByTestId('video-player'));
     expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /play/i })).not.toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /pause/i }));
@@ -73,7 +88,7 @@ describe('Component: Player', () => {
     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
   });
 
-  it('should display fullscreen button', async () => {
+  it('should toggle fullscreen', async () => {
     const { component } = withProviders(<Player />, {
       film: {
         selectedFilm: mockSelectedFilm,
@@ -82,5 +97,82 @@ describe('Component: Player', () => {
     render(component);
     expect(screen.getByRole('button', { name: /full screen/i })).toBeInTheDocument();
     await userEvent.click(screen.getByRole('button', { name: /full screen/i }));
+    Object.defineProperty(document, 'fullscreenElement', {
+      writable: true,
+      value: undefined,
+    });
+    await userEvent.click(screen.getByRole('button', { name: /full screen/i }));
+  });
+
+  it('should exit fullscreen', async () => {
+    const { component } = withProviders(<Player />, {
+      film: {
+        selectedFilm: mockSelectedFilm,
+      }
+    });
+    render(component);
+    Object.defineProperty(document, 'exitFullscreen', {
+      writable: true,
+      value: vi.fn(),
+    });
+    await userEvent.click(screen.getByRole('button', { name: /full screen/i }));
+    Object.defineProperty(document, 'exitFullscreen', {
+      writable: true,
+      value: undefined,
+    });
+  });
+
+  it('should exit fullscreen in mozilla', async () => {
+    const { component } = withProviders(<Player />, {
+      film: {
+        selectedFilm: mockSelectedFilm,
+      }
+    });
+    render(component);
+    Object.defineProperty(document, 'mozCancelFullScreen', {
+      writable: true,
+      value: vi.fn(),
+    });
+    await userEvent.click(screen.getByRole('button', { name: /full screen/i }));
+    Object.defineProperty(document, 'mozCancelFullScreen', {
+      writable: true,
+      value: undefined,
+    });
+  });
+
+  it('should exit fullscreen in safari', async () => {
+    const { component } = withProviders(<Player />, {
+      film: {
+        selectedFilm: mockSelectedFilm,
+      }
+    });
+    render(component);
+    Object.defineProperty(document, 'webkitExitFullscreen', {
+      writable: true,
+      value: vi.fn(),
+    });
+    await userEvent.click(screen.getByRole('button', { name: /full screen/i }));
+    Object.defineProperty(document, 'webkitExitFullscreen', {
+      writable: true,
+      value: undefined,
+    });
+  });
+
+  it('should exit fullscreen in explorer ', async () => {
+    const { component } = withProviders(<Player />, {
+      film: {
+        selectedFilm: mockSelectedFilm,
+      }
+    });
+    render(component);
+    Object.defineProperty(document, 'msExitFullscreen', {
+      writable: true,
+      value: vi.fn(),
+    });
+    await userEvent.click(screen.getByRole('button', { name: /full screen/i }));
+    Object.defineProperty(document, 'msExitFullscreen', {
+      writable: true,
+      value: undefined,
+    });
   });
 });
