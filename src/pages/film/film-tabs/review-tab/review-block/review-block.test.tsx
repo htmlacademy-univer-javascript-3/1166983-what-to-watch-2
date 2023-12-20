@@ -11,7 +11,7 @@ describe('Component: ReviewBlock', () => {
   it('should render correctly', () => {
     render(<ReviewBlock {...mockReviewDetails} />);
     expect(screen.getByTestId('review-block')).toBeInTheDocument();
-    expect(screen.getByText(mockReviewDetails.comment)).toBeInTheDocument();
+    expect(screen.getByText(mockReviewDetails.comment.trim())).toBeInTheDocument();
     expect(screen.getByText(mockReviewDetails.rating)).toBeInTheDocument();
     expect(screen.getByText(mockReviewDetails.user)).toBeInTheDocument();
     expect(screen.getByText(formatDate(mockReviewDetails.date, DateFormats.Standard))).toBeInTheDocument();
