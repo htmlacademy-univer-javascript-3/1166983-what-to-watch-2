@@ -3,8 +3,10 @@ import { DateFormats } from '../types/date.ts';
 
 describe('Utils: Formats', () => {
   it('should format player time', () => {
-    const mockSeconds = 5000;
-    expect(formatPlayerTime(mockSeconds)).toEqual('01:23:20');
+    const mockTime = 1000;
+    const mockDuration = 10000;
+    expect(formatPlayerTime(mockTime, mockDuration)).toEqual('-05:30:00');
+    expect(formatPlayerTime(mockTime, mockTime)).toEqual('-00:00');
   });
 
   it('should format dates', () => {
