@@ -42,6 +42,10 @@ export default function SignInForm() {
             disabled={isSubmitting}
             rules={{
               required: true,
+              pattern: {
+                value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                message: 'Email must be valid',
+              },
             }}
             render={({ field }) => (
               <input
