@@ -46,7 +46,7 @@ export function mockUserDetails(): UserData {
 export function mockUserCredentials(): UserCredentials {
   return ({
     email: faker.internet.email(),
-    password: faker.internet.password(),
+    password: `${faker.internet.password()}1A`,
   });
 }
 
