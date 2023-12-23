@@ -4,7 +4,7 @@ import { DateFormats } from '../types/date.ts';
 export function formatPlayerTime(time: number, duration: number): string {
   const secondsLeft = duration - time;
   const isLongerThanHour = secondsLeft >= 3600;
-  return dayjs(new Date(secondsLeft * 1000)).format(isLongerThanHour ? '-HH:mm:ss' : '-mm:ss');
+  return dayjs(secondsLeft * 1000, 'ss').format(isLongerThanHour ? '-HH:mm:ss' : '-mm:ss');
 }
 
 export function formatDate(date: string, format: DateFormats): string {
