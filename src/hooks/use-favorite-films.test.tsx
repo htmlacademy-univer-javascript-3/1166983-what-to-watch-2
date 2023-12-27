@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { useFavoriteFilms } from './useFavoriteFilms.ts';
+import { useFavoriteFilms } from './use-favorite-films.ts';
 import { getHookWrapper } from '../utils/mock-component.tsx';
 import { mockFilmArray, mockUserDetails } from '../utils/mock-data.ts';
 import { AuthorizationStatus } from '../types/user.ts';

@@ -3,7 +3,7 @@ import { getHookWrapper } from '../utils/mock-component.tsx';
 import { mockFilmArray, mockReviewArray } from '../utils/mock-data.ts';
 import { extractActionsTypes } from '../utils/mock-reducer.ts';
 import { loadFilmDetails, loadReviews, loadSuggestions } from '../store/api-actions.ts';
-import { useSelectedFilm } from './useSelectedFilm.ts';
+import { useSelectedFilm } from './use-selected-film.ts';
 import { expect } from 'vitest';
 import { NOT_FOUND_URL } from '../constants/route.ts';
 import { StatusCodes } from 'http-status-codes';
