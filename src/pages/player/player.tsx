@@ -3,7 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../types/routes.ts';
 import TimeControls from './time-controls';
-import { useSelectedFilm } from '../../hooks/useSelectedFilm.ts';
+import { useSelectedFilm } from '../../hooks/use-selected-film.ts';
 import RequestSuspense from '../../components/request-suspense';
 
 interface CrossBrowserDocument {
